@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+  - name: Short Term Metrics
+    type: prometheus
+    url: http://localhost:8428
+    isDefault: true
+    uid: P27AA5C6EF93B953C
+  - name: Long Term Metrics
+    type: prometheus
+    url: http://localhost:8429
+    uid: P3D096F30CDAF9ECC 

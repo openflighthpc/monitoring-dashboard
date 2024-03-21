@@ -1,0 +1,4 @@
+global:
+  scrape_interval: 60s
+scrape_config_files:
+- /etc/victoria-metrics/configs/*.yml

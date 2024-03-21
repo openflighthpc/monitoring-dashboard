@@ -1,0 +1,43 @@
+groups:
+  - name: slurm-scheduler
+    interval: 1h
+    eval_offset: 0m
+    rules:
+      # These are counters, so use sum_over_time matching the downsample interval
+      - record: slurm_queue_cancelled
+        expr: sum_over_time(slurm_queue_cancelled[1h])
+      - record: slurm_queue_completed
+        expr: sum_over_time(slurm_queue_completed[1h])
+      - record: slurm_queue_failed
+        expr: sum_over_time(slurm_queue_failed[1h])
+      - record: slurm_queue_node_fail
+        expr: sum_over_time(slurm_queue_node_fail[1h])
+      - record: slurm_queue_preempted
+        expr: sum_over_time(slurm_queue_preempted[1h])
+      - record: slurm_queue_suspended
+        expr: sum_over_time(slurm_queue_suspended[1h])
+      - record: slurm_queue_timeout
+        expr: sum_over_time(slurm_queue_timeout[1h])
+      # These are metrics, so simply grab the latest value
+      - record: slurm_queue_completing
+        expr: slurm_queue_completing
+      - record: slurm_queue_configuring
+        expr: slurm_queue_configuring
+      - record: slurm_queue_pending
+        expr: slurm_queue_pending
+      - record: slurm_queue_pending_dependancy
+        expr: slurm_queue_pending_dependancy
+      - record: slurm_queue_running
+        expr: slurm_queue_running
+      - record: slurm_node_cpu_total
+        expr: sum by (node, status) (slurm_node_cpu_total)
+      - record: slurm_node_cpu_alloc
+        expr: sum by (node, status) (slurm_node_cpu_alloc)
+      - record: slurm_node_mem_total
+        expr: sum by (node, status) (slurm_node_mem_total)
+      - record: slurm_node_mem_alloc
+        expr: sum by (node, status) (slurm_node_mem_alloc)
+      - record: slurm_node_gpu_total
+        expr: sum by (node, status) (slurm_node_gpu_total)
+      - record: slurm_node_gpu_alloc
+        expr: sum by (node, status) (slurm_node_gpu_alloc)

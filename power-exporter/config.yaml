@@ -1,0 +1,10 @@
+scheduler:
+  noop:
+    enabled: true
+methods:
+  snmpv2:
+    community: public
+logging:
+  path: /var/log/power-exporter/exporter.log
+exporter:
+  port: 9106

@@ -1,0 +1,11 @@
+groups:
+  - name: compute-metrics
+    interval: 1h
+    eval_offset: 0m
+    rules:
+      - record: cluster_cpu_usage
+        expr: avg_over_time(avg((sum by(instance) (irate(node_cpu_seconds_total{mode!="idle"}[1m])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{}[1m])))) * 100)[1h])
+      - record: cluster_memory_usage
+        expr: avg_over_time(avg(100 - ((node_memory_MemAvailable_bytes * 100) / node_memory_MemTotal_bytes))[1h])
+      - record: cluster_load_avg
+        expr: avg_over_time(avg(avg(node_load1) / count(count(node_cpu_seconds_total) by (cpu)) * 100)[1h])

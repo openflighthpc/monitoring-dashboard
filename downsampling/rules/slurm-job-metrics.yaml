@@ -1,0 +1,9 @@
+groups:
+  - name: slurm-jobmetrics
+    interval: 1h
+    eval_offset: 0m
+    rules:
+      - record: slurm_job_cpu_eff
+        expr: avg by (user, account) (last_over_time((slurm_job_cpu_eff != Inf)[1h]))
+      - record: slurm_job_mem_util
+        expr: avg by (user, account) (last_over_time((slurm_job_mem_util != Inf)[1h]))

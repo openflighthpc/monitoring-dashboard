@@ -1,0 +1,7 @@
+groups:
+  - name: power-usage
+    interval: 1h
+    eval_offset: 0m
+    rules:
+      - record: cluster_power_usage
+        expr: sum by (type, state) (node_power_usage{})

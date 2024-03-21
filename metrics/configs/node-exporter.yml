@@ -1,0 +1,9 @@
+  - job_name: 'node'
+    file_sd_configs:
+      - files:
+        - '/etc/victoria-metrics/targets/node-exporter.yml'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
