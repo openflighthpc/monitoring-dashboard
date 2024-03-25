@@ -1,5 +1,6 @@
   - job_name: 'slurm'
     scrape_interval: 5m
+    scrape_timeout: 5m
     file_sd_configs:
       - files:
         - '/etc/victoria-metrics/targets/slurm-exporter.yml'
