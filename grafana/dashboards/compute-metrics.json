@@ -2514,7 +2514,7 @@
         "multiFormat": "regex values",
         "name": "node",
         "options": [],
-        "query": "label_values(node_exporter_build_info{name='$name'},instance)",
+        "query": "label_values(node_exporter_build_info{name='$name', node_type='compute'},instance)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
