@@ -5,6 +5,7 @@ Monitoring Dashboard built upon several common open source projects.
 - [Slurm Exporter](https://github.com/vpenso/prometheus-slurm-exporter)
 - [Node Exporter](https://github.com/prometheus/node_exporter)
 - [Power Exporter](https://github.com/openflighthpc/power-exporter)
+- [Slurm Job Exporter](https://github.com/openflighthpc/slurm-job-exporter)
 
 ## Prerequisites
 - Suitable sized host with sufficient storage in `/var` for Docker volumes.
@@ -61,10 +62,17 @@ Add your list of hosts to `/etc/alces-dashboard/metrics/targets/node-exporter.ym
 ```
 
 ### Slurm Exporter
-Add your scheduler host to `/etc/alces-dashboard/metrics/targets/slurm-exporter.yml`
+Install this as per the upstream documentation and then update the target file `/etc/alces-dashboard/metrics/targets/slurm-exporter.yml` to include the relevant host. The default configuration assumes this is installed on the same host.
 ```
 - targets:
-  - infra01:9100
+  - localhost:9103
+```
+
+### Slurm Job Exporter
+Install this as per the upstream documentation and then update the target file `/etc/alces-dashboard/metrics/targets/slurm-job-exporter.yml` to include the relevant host. The default configuration assumes this is installed on the same host.
+```
+- targets:
+  - localhost:9103
 ```
 
 ### Power Exporter
