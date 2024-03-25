@@ -46,11 +46,18 @@ docker exec -it alces-dashboard-grafana /usr/share/grafana/bin/grafana-cli admin
 Once deployed, you will need to configure the relevant services to collect metrics from your hosts.
 
 ### Node Exporter
-Add your list of hosts to `/etc/alces-dashboard/metrics/targets/node-exporter.yml`
+Add your list of hosts to `/etc/alces-dashboard/metrics/targets/node-exporter.yml`. Ensure any compute nodes are added with the correct `node_type: compute` label and any core nodes are added with `node_type: core`.
 ```
+- targets:
+  - master01:9100
+  - master02:9100
+  labels:
+    node_type: core
 - targets:
   - node01:9100
   - node02:9100
+  labels:
+    node_type: compute
 ```
 
 ### Slurm Exporter
