@@ -15,6 +15,7 @@ docker run -d -it \
 	--restart unless-stopped \
 	--name alces-dashboard-proxy \
 	--mount type=bind,source=/etc/alces-dashboard/certs,target=/etc/nginx/certs \
+	--mount type=bind,source=/var/lib/sss/pipes,target=/var/lib/sss/pipes \
 	--health-cmd='curl -s --fail http://localhost:80 || exit 1' \
 	alces-dashboard-proxy:latest
 

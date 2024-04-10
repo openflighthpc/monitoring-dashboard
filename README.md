@@ -12,6 +12,7 @@ Monitoring Dashboard built upon several common open source projects.
 - Docker / Podman installed.
 - SSL certificate and keyfile.
 - Git
+- Optional: sssd configured on the host to provide basic nginx authentication.
 
 ## Installation
 Clone this git repository and checkout the desired branch / release.
@@ -32,7 +33,7 @@ cp /path/to/certificate /etc/alces-dashboard/certs/dashboard.crt
 cp /path/to/key /etc/alces-dashboard/certs/dashboard.key
 ```
 
-Build and run the containers using the bash script.
+Build and run the containers using the bash script. If you do not wish to use sssd configured on the host for authentication, update the build script to build use `docker/proxy-noauth.Dockerfile` instead. 
 ```
 bash build.sh
 bash run.sh
