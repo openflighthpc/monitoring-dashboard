@@ -647,6 +647,7 @@
               "__name__": true,
               "account": true,
               "energy": true,
+	      "gpus": true,
               "instance": true,
               "job": true,
               "nodes": false,
