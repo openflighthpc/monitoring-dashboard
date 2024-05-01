@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 16,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -345,7 +344,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "round(slurm_queue_completed/5, 1)",
+          "expr": "sum by (job)(round(slurm_queue_completed/5, 1))",
           "instant": false,
           "interval": "1h",
           "legendFormat": "Completed",
@@ -358,7 +357,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "round(slurm_queue_pending/5, 1)",
+          "expr": "sum by (job) (round(slurm_queue_pending/5, 1))",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -372,7 +371,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "round(slurm_queue_running/5, 1)",
+          "expr": "sum by (job) (round(slurm_queue_running/5, 1))",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -386,7 +385,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "round(slurm_queue_failed/5, 1)",
+          "expr": "sum by (job) (round(slurm_queue_failed/5, 1))",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -400,7 +399,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "round(slurm_queue_cancelled/5, 1)",
+          "expr": "sum by (job) (round(slurm_queue_cancelled/5, 1))",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -429,6 +428,6 @@
   "timezone": "",
   "title": "Slurm Scheduler Trends",
   "uid": "fd12849a-ee90-42ba-8e1f-3a0951d6847a",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
