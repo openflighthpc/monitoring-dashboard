@@ -666,7 +666,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\", user=~\"$user\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
+          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\", user=~\"$user\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -878,7 +878,7 @@
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (account) (last_over_time(slurm_job_meta[$__range])))",
+        "definition": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
         "description": "Slurm account.",
         "hide": 0,
         "includeAll": true,
@@ -888,7 +888,7 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(count by (account) (last_over_time(slurm_job_meta[$__range])))",
+          "query": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -907,7 +907,7 @@
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (partition) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+        "definition": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
         "hide": 0,
         "includeAll": true,
         "label": "Partition",
@@ -916,7 +916,7 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(count by (partition) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+          "query": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -935,7 +935,7 @@
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\"}[$__range])))",
+        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
         "description": "Cluster user.",
         "hide": 0,
         "includeAll": true,
@@ -945,7 +945,7 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\"}[$__range])))",
+          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
