@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 12,
+  "id": 17,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -41,10 +41,10 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "P27AA5C6EF93B953C"
+        "type": "datasource",
+        "uid": "-- Dashboard --"
       },
-      "description": "Total jobs terminated (Completed, Failed, Timeout, Deadline) in the selected period.",
+      "description": "Total jobs terminated in the selected period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -128,7 +128,7 @@
         "x": 0,
         "y": 1
       },
-      "id": 20,
+      "id": 24,
       "options": {
         "displayLabels": [
           "percent"
@@ -160,22 +160,65 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "P27AA5C6EF93B953C"
+            "type": "datasource",
+            "uid": "-- Dashboard --"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "count by (state) (last_over_time(slurm_job_meta{account=~\"$account\", user=~\"$user\"}[$__range]))",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "Completed"
+          "panelId": 11,
+          "refId": "A",
+          "withTransforms": false
         }
       ],
       "title": "Total Jobs",
-      "transformations": [],
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "jobid": {
+                "aggregations": [
+                  "distinctCount"
+                ],
+                "operation": "aggregate"
+              },
+              "state": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "account": true,
+              "cpu_eff": true,
+              "cpus": true,
+              "gpus": true,
+              "instance": true,
+              "job": true,
+              "jobid": true,
+              "mem_util": true,
+              "memory": true,
+              "nodes": true,
+              "partition": true,
+              "runtime": true,
+              "state": false,
+              "user": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "jobid (distinctCount)": "",
+              "state": ""
+            }
+          }
+        }
+      ],
       "type": "piechart"
     },
     {
@@ -303,7 +346,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "This dashboard is designed to offer insights into resource utilisation and job efficiency on a per account / user basis using the filters above. \nThe data is displayed as per the timeframe specified and only includes jobs that have terminated in that timeframe. Please see tooltips on metrics for further details.\n\nUsers and accounts with large numbers of jobs may not display. To resolve this, use a short time window.",
+        "content": "This dashboard is designed to offer insights into resource utilisation and job efficiency on a per account, partition or user basis using the filters above. \nThe data is displayed as per the timeframe specified and only includes jobs that have terminated successfully in that timeframe. Please see tooltips on metrics for further details.\n\nEfficiency and utilisation values are estimated based on Slurm data and may not be accurate.\n\nUsers and accounts with large numbers of jobs may not display. To resolve this, use a short time window.",
         "mode": "markdown"
       },
       "pluginVersion": "10.2.2",
@@ -612,12 +655,7 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Memory Utilisation"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "10.2.2",
       "targets": [
@@ -628,7 +666,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time(slurm_job_meta{account=~\"$account\", user=~\"$user\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
+          "expr": "last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\", user=~\"$user\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -647,7 +685,7 @@
               "__name__": true,
               "account": true,
               "energy": true,
-	      "gpus": true,
+              "gpus": false,
               "instance": true,
               "job": true,
               "nodes": false,
@@ -659,13 +697,13 @@
               "Value": 6,
               "__name__": 1,
               "account": 2,
-              "cpu_eff": 14,
+              "cpu_eff": 15,
               "cpus": 12,
-              "energy": 16,
+              "gpus": 14,
               "instance": 3,
               "job": 4,
               "jobid": 7,
-              "mem_util": 15,
+              "mem_util": 16,
               "memory": 13,
               "nodes": 11,
               "partition": 8,
@@ -678,6 +716,7 @@
               "cpu_eff": "CPU Efficiency",
               "cpus": "Allocated CPUs",
               "energy": "Energy Usage",
+              "gpus": "Allocated GPUs",
               "jobid": "Job ID",
               "mem_util": "Memory Utilisation",
               "memory": "Allocated Memory",
@@ -795,19 +834,19 @@
             "indexByName": {
               "Allocated CPUs": 5,
               "Allocated CPUs numeric": 6,
+              "Allocated GPUs": 9,
               "Allocated Memory": 7,
               "Allocated Memory numeric": 8,
               "Allocated Nodes": 3,
               "Allocated Nodes numeric": 4,
-              "CPU Efficiency": 9,
-              "CPU Efficiency numeric": 10,
-              "Energy Cost": 14,
-              "Energy Usage": 13,
+              "CPU Efficiency": 10,
+              "CPU Efficiency numeric": 11,
               "Job ID": 0,
-              "Memory Utilisation": 11,
-              "Memory Utilisation numeric": 12,
+              "Memory Utilisation": 12,
+              "Memory Utilisation numeric": 13,
               "Partition": 1,
-              "State": 2
+              "State": 2,
+              "Walltime": 14
             },
             "renameByName": {
               "Allocated CPUs numeric": "Allocated CPUs",
@@ -832,8 +871,8 @@
       {
         "current": {
           "selected": false,
-          "text": "arch-adna-2019",
-          "value": "arch-adna-2019"
+          "text": "default",
+          "value": "default"
         },
         "datasource": {
           "type": "prometheus",
@@ -842,9 +881,9 @@
         "definition": "query_result(count by (account) (last_over_time(slurm_job_meta[$__range])))",
         "description": "Slurm account.",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Account",
-        "multi": false,
+        "multi": true,
         "name": "account",
         "options": [],
         "query": {
@@ -861,6 +900,34 @@
       {
         "current": {
           "selected": false,
+          "text": "k2-gpu",
+          "value": "k2-gpu"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P27AA5C6EF93B953C"
+        },
+        "definition": "query_result(count by (partition) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Partition",
+        "multi": true,
+        "name": "partition",
+        "options": [],
+        "query": {
+          "qryType": 3,
+          "query": "query_result(count by (partition) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": ".*partition=\"(.*?)\".*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -868,7 +935,7 @@
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\"}[$__range])))",
         "description": "Cluster user.",
         "hide": 0,
         "includeAll": true,
@@ -878,7 +945,7 @@
         "options": [],
         "query": {
           "qryType": 3,
-          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\"}[$__range])))",
+          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{account=~\"$account\", partition=~\"$partition\"}[$__range])))",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -890,13 +957,13 @@
     ]
   },
   "time": {
-    "from": "now-1d",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Slurm Job Metrics (by Account/User)",
-  "uid": "gk6UGAvIz",
-  "version": 1,
+  "uid": "d0cad303-0639-426e-a54a-3ab6faabddf5",
+  "version": 12,
   "weekStart": ""
 }

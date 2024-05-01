@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 13,
+  "id": 16,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -27,6 +27,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Total number of Slurm jobs completed in the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -48,8 +49,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
+        "h": 5,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -88,6 +89,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Total number of Slurm jobs failed in the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -113,9 +115,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
+        "h": 5,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 6,
@@ -153,6 +155,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Total number of Slurm jobs cancelled in the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -178,9 +181,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
+        "h": 5,
+        "w": 4,
+        "x": 8,
         "y": 0
       },
       "id": 7,
@@ -214,11 +217,36 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard provides an overview on the Slurm jobs ran during the selected time period.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Description",
+      "type": "text"
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 5
       },
       "id": 4,
       "title": "Graphs",
@@ -229,6 +257,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Overview of Slurm job exit states across the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -289,7 +318,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 6
       },
       "id": 1,
       "options": {
@@ -382,537 +411,6 @@
       ],
       "title": "Slurm Jobs",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P3D096F30CDAF9ECC"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false,
-            "minWidth": 50
-          },
-          "decimals": 2,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU Efficiency"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red",
-                      "value": null
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Utilisation"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red",
-                      "value": null
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Energy"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "blue",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "unit",
-                "value": "watth"
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Cost"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "currencyGBP"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "blue",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 21,
-        "w": 12,
-        "x": 0,
-        "y": 24
-      },
-      "id": 2,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "frameIndex": 2,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "CPU Efficiency"
-          }
-        ]
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by (account) (avg_over_time((slurm_job_cpu_eff != Inf)[$__range]))",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{account}}",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by (account) (avg_over_time((slurm_job_mem_util != Inf)[$__range]))",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{account}}",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Average Job Efficiency (by Account)",
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "account",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Time 1": true,
-              "Time 2": true,
-              "Time 3": true,
-              "Time 4": true
-            },
-            "indexByName": {},
-            "renameByName": {
-              "Value #A": "CPU Efficiency",
-              "Value #B": "Memory Utilisation",
-              "Value #C": "Total Energy",
-              "Value #D": "Total Cost",
-              "account": "Account"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P3D096F30CDAF9ECC"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false,
-            "minWidth": 50
-          },
-          "decimals": 2,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU Efficiency"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red",
-                      "value": null
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Utilisation"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red",
-                      "value": null
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Energy"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "blue",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "unit",
-                "value": "watth"
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Cost"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "currencyGBP"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "blue",
-                      "value": null
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 21,
-        "w": 12,
-        "x": 12,
-        "y": 24
-      },
-      "id": 3,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "frameIndex": 2,
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "CPU Efficiency"
-          }
-        ]
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by (user) (avg_over_time((slurm_job_cpu_eff != Inf)[$__range]))",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{user}}",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by (user) (avg_over_time((slurm_job_mem_util != Inf)[$__range]))",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "{{user}}",
-          "range": false,
-          "refId": "B"
-        }
-      ],
-      "title": "Average Job Efficiency (by User)",
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "user",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Time 1": true,
-              "Time 2": true,
-              "Time 3": true,
-              "Time 4": true
-            },
-            "indexByName": {},
-            "renameByName": {
-              "Value #A": "CPU Efficiency",
-              "Value #B": "Memory Utilisation",
-              "Value #C": "Total Energy",
-              "Value #D": "Total Cost",
-              "account": "Account",
-              "user": "User"
-            }
-          }
-        }
-      ],
-      "type": "table"
     }
   ],
   "refresh": "",
@@ -930,7 +428,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Slurm Scheduler Trends",
-  "uid": "bcd45d7b-7310-4715-ae80-6c74d39e987a",
-  "version": 1,
+  "uid": "fd12849a-ee90-42ba-8e1f-3a0951d6847a",
+  "version": 4,
   "weekStart": ""
 }

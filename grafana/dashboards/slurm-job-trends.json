@@ -27,6 +27,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Average CPU Efficiency of all jobs in the select time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -49,7 +50,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -88,6 +89,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Average Memory Utilisation of all jobs in the select time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -110,8 +112,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 3,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 8,
@@ -145,6 +147,31 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 16,
+        "x": 8,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard provides an overview of estimated CPU efficiency and memory utilisation by account/user.\n\nEfficiency and utilisation values are estimated based on Slurm data and may not be accurate, particularly for users with high numbers of failed or cancelled jobs.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Description",
+      "type": "text"
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -160,7 +187,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
-      "description": "",
+      "description": "Average CPU Efficiency and Memory Utilisation of all jobs in the select time period by account.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -425,7 +452,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
-      "description": "",
+      "description": "Average CPU Efficiency and Memory Utilisation of all jobs in the select time period by user.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -702,7 +729,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Slurm Job Trends",
-  "uid": "ad812449-12ee-49b1-9e8f-761e7185e2a1",
-  "version": 1,
+  "uid": "ab48c398-e1d7-4a84-8fb7-3792ddd25923",
+  "version": 3,
   "weekStart": ""
 }

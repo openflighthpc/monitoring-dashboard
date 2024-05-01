@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 15,
+  "id": 13,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -27,6 +27,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Current filesystem usage (storage space).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -58,8 +59,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 0
       },
@@ -68,7 +69,7 @@
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "vertical",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -77,7 +78,7 @@
           "values": false
         },
         "textMode": "value_and_name",
-        "wideLayout": false
+        "wideLayout": true
       },
       "pluginVersion": "10.2.2",
       "targets": [
@@ -99,11 +100,36 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard provides an overview of your cluster filesystem usage over the selected time period.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Description",
+      "type": "text"
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 9
       },
       "id": 2,
       "title": "Graphs",
@@ -114,6 +140,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Storage usage of the cluster filesystems over the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -151,6 +178,7 @@
               "mode": "off"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "max": 1,
           "min": 0,
@@ -175,7 +203,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 10
       },
       "id": 1,
       "options": {
@@ -210,7 +238,113 @@
           "refId": "A"
         }
       ],
-      "title": "Filesystem Usage",
+      "title": "Filesystem Storage Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P3D096F30CDAF9ECC"
+      },
+      "description": "File count usage of the cluster filesystems over the selected time period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "editorMode": "code",
+          "expr": "1.0 - (filesystem_files_free{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_files{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
+          "instant": false,
+          "interval": "1h",
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Filesystem File Usage",
       "type": "timeseries"
     }
   ],
@@ -228,8 +362,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Storage Trends",
-  "uid": "fcf08d3d-24ad-48cf-8465-d30eefa77397",
-  "version": 1,
+  "title": "Storage Trends - v1.1",
+  "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
+  "version": 3,
   "weekStart": ""
 }

@@ -27,6 +27,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Overall average CPU usage of all cluster compute nodes across the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -54,7 +55,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -93,6 +94,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "description": "Overall average Memory usage of all cluster compute nodes across the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -120,8 +122,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 3,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 9,
@@ -155,6 +157,31 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 16,
+        "x": 8,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard provides long term CPU and Memory usage trends for your cluster compute nodes.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Description",
+      "type": "text"
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -170,6 +197,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Average CPU usage of all cluster compute nodes over the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -243,7 +271,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -274,6 +302,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Average Memory usage of all cluster compute nodes over the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -347,7 +376,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -389,7 +418,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Compute Trends",
-  "uid": "d3fa74ba-2e2a-4849-8580-29bfaba39f71",
-  "version": 1,
+  "uid": "e25afd86-b9c4-4afb-a84f-78ed921e5634",
+  "version": 3,
   "weekStart": ""
 }

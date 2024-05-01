@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 16,
+  "id": 19,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -27,6 +27,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Total estimated power usage over the selected time period (including PUE factor).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -47,8 +48,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
+        "h": 5,
+        "w": 4,
         "x": 0,
         "y": 0
       },
@@ -92,6 +93,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Total estimated power cost over the selected time period (including PUE factor).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -112,9 +114,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 3,
+        "h": 5,
+        "w": 4,
+        "x": 4,
         "y": 0
       },
       "id": 3,
@@ -157,6 +159,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Total estimated idle power cost over the selected time period (including PUE factor).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -177,9 +180,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
+        "h": 5,
+        "w": 4,
+        "x": 8,
         "y": 0
       },
       "id": 4,
@@ -218,11 +221,36 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "This dashboard provides an overview of the estimated power usage of your cluster.\n\nData is estimated based on the power reported from the server management controllers and therefore does not include cooling overhead. The Power Usage Effectiveness variable can be adjusted to estimate this (default 20%). ",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.2",
+      "title": "Description",
+      "type": "text"
+    },
+    {
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 5
       },
       "id": 6,
       "title": "Graphs",
@@ -233,6 +261,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Estimated total and idle power usage across the selected time period (includes PUE factor).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -292,7 +321,7 @@
         "h": 19,
         "w": 12,
         "x": 0,
-        "y": 5
+        "y": 6
       },
       "id": 1,
       "options": {
@@ -303,7 +332,7 @@
             "max"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -346,6 +375,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Average cluster load across the selected time period.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -407,7 +437,7 @@
         "h": 19,
         "w": 12,
         "x": 12,
-        "y": 5
+        "y": 6
       },
       "id": 5,
       "options": {
@@ -419,7 +449,7 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
@@ -437,7 +467,7 @@
           "expr": "cluster_load_avg",
           "instant": false,
           "interval": "1h",
-          "legendFormat": "__auto",
+          "legendFormat": "Average Load",
           "range": true,
           "refId": "A"
         }
@@ -504,7 +534,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Power Trends",
-  "uid": "d2891599-5c96-4f70-bfee-be1b9ebd40ed",
-  "version": 1,
+  "uid": "bf048a64-b8a8-4844-8e95-071f958888b3",
+  "version": 2,
   "weekStart": ""
 }
