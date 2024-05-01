@@ -20,7 +20,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 9894,
   "graphTooltip": 0,
-  "id": 21,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -353,11 +352,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "(1 - (node_memory_MemAvailable_bytes{instance=~\"$node\"} / (node_memory_MemTotal_bytes{instance=~\"$node\"})))* 100",
+          "editorMode": "code",
+          "expr": "max by (instance) ((1 - (node_memory_MemAvailable_bytes{instance=~\"$node\"} / (node_memory_MemTotal_bytes{instance=~\"$node\"})))* 100)",
           "format": "time_series",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
+          "range": true,
           "refId": "A",
           "step": 20
         }
@@ -592,6 +593,7 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
+          "editorMode": "code",
           "expr": "node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs\"}",
           "format": "table",
           "hide": true,
@@ -965,7 +967,8 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_load1{instance=~\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance) (node_load1{instance=~\"$node\"})",
           "format": "time_series",
           "instant": false,
           "interval": "10s",
@@ -981,7 +984,8 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_load5{instance=~\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance) (node_load5{instance=~\"$node\"})",
           "format": "time_series",
           "instant": false,
           "interval": "10s",
@@ -995,7 +999,8 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_load15{instance=~\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance) (node_load15{instance=~\"$node\"})",
           "format": "time_series",
           "instant": false,
           "interval": "10s",
@@ -1444,11 +1449,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"system\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum by (instance) (avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"system\"}[1m])))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "System",
+          "range": true,
           "refId": "A",
           "step": 20
         },
@@ -1457,10 +1464,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"user\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum by (instance) (avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"user\"}[1m])))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "User",
+          "range": true,
           "refId": "B",
           "step": 240
         },
@@ -1469,11 +1478,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"idle\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum by (instance) (avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"idle\"}[1m])))",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
           "legendFormat": "Idle",
+          "range": true,
           "refId": "F",
           "step": 240
         },
@@ -1482,10 +1493,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"iowait\"}[1m]))",
+          "editorMode": "code",
+          "expr": "sum by (instance) (avg(irate(node_cpu_seconds_total{instance=~\"$node\",mode=\"iowait\"}[1m])))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Iowait",
+          "range": true,
           "refId": "D",
           "step": 240
         },
@@ -1494,10 +1507,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}_% of I/O operations per second",
+          "range": true,
           "refId": "C"
         }
       ],
@@ -1642,7 +1657,7 @@
             "uid": "P27AA5C6EF93B953C"
           },
           "editorMode": "code",
-          "expr": "node_memory_MemTotal_bytes{instance=~\"$node\"}",
+          "expr": "sum by (instance) (node_memory_MemTotal_bytes{instance=~\"$node\"})",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1657,7 +1672,7 @@
             "uid": "P27AA5C6EF93B953C"
           },
           "editorMode": "code",
-          "expr": "node_memory_MemTotal_bytes{instance=~\"$node\"} - node_memory_MemAvailable_bytes{instance=~\"$node\"}",
+          "expr": "sum by (instance) (node_memory_MemTotal_bytes{instance=~\"$node\"} - node_memory_MemAvailable_bytes{instance=~\"$node\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1671,12 +1686,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_memory_MemAvailable_bytes{instance=~\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance) (node_memory_MemAvailable_bytes{instance=~\"$node\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "Available",
+          "range": true,
           "refId": "F",
           "step": 4
         }
@@ -1843,12 +1860,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_reads_completed_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_reads_completed_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{device}}_read",
+          "range": true,
           "refId": "A",
           "step": 10
         },
@@ -1857,11 +1876,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_writes_completed_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_writes_completed_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
           "legendFormat": "{{device}}_write",
+          "range": true,
           "refId": "B",
           "step": 10
         },
@@ -1870,12 +1891,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_disk_io_now{instance=~\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (node_disk_io_now{instance=~\"$node\"})",
           "format": "time_series",
           "hide": true,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
+          "range": true,
           "refId": "C"
         }
       ],
@@ -2041,11 +2064,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_read_bytes_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_read_bytes_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{device}}_read",
+          "range": true,
           "refId": "A",
           "step": 10
         },
@@ -2054,11 +2079,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_written_bytes_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_written_bytes_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
           "legendFormat": "{{device}}_write",
+          "range": true,
           "refId": "B",
           "step": 10
         }
@@ -2225,12 +2252,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (sum by (instance, device) (irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[1m])))",
           "format": "time_series",
           "hide": true,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "{{device}}",
+          "range": true,
           "refId": "A",
           "step": 10
         },
@@ -2239,11 +2268,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_io_time_weighted_seconds_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (sum by (instance, device) (irate(node_disk_io_time_weighted_seconds_total{instance=~\"$node\"}[1m])))",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
           "legendFormat": "{{device}}_weighted",
+          "range": true,
           "refId": "D"
         },
         {
@@ -2251,12 +2282,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_read_time_seconds_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_read_time_seconds_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{device}}_read",
+          "range": true,
           "refId": "B"
         },
         {
@@ -2264,11 +2297,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_disk_write_time_seconds_total{instance=~\"$node\"}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_disk_write_time_seconds_total{instance=~\"$node\"}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "{{device}}_write",
+          "range": true,
           "refId": "C"
         }
       ],
@@ -2418,10 +2453,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_network_receive_bytes_total{instance=~'$node',device!~'tap.*'}[5m])*8",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_network_receive_bytes_total{instance=~'$node',device!~'tap.*'}[5m])*8)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}}_in download",
+          "range": true,
           "refId": "A",
           "step": 4
         },
@@ -2430,10 +2467,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_network_transmit_bytes_total{instance=~'$node',device!~'tap.*'}[5m])*8",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_network_transmit_bytes_total{instance=~'$node',device!~'tap.*'}[5m])*8)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}}_out upload",
+          "range": true,
           "refId": "B",
           "step": 4
         }
@@ -2548,12 +2587,14 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_netstat_Tcp_CurrEstab{instance=~'$node'}",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (node_netstat_Tcp_CurrEstab{instance=~'$node'})",
           "format": "time_series",
           "hide": false,
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "ESTABLISHED",
+          "range": true,
           "refId": "A",
           "step": 20
         },
@@ -2562,10 +2603,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_sockstat_TCP_tw{instance=~'$node'}",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (node_sockstat_TCP_tw{instance=~'$node'})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "TCP_tw",
+          "range": true,
           "refId": "D"
         },
         {
@@ -2573,11 +2616,13 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_netstat_Tcp_ActiveOpens{instance=~'$node'}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_netstat_Tcp_ActiveOpens{instance=~'$node'}[1m]))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "legendFormat": "ActiveOpens",
+          "range": true,
           "refId": "B"
         },
         {
@@ -2585,10 +2630,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "irate(node_netstat_Tcp_PassiveOpens{instance=~'$node'}[1m])",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (irate(node_netstat_Tcp_PassiveOpens{instance=~'$node'}[1m]))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "PassiveOpens",
+          "range": true,
           "refId": "C"
         },
         {
@@ -2596,10 +2643,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_sockstat_TCP_alloc{instance=~'$node'}",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (node_sockstat_TCP_alloc{instance=~'$node'})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "TCP_alloc",
+          "range": true,
           "refId": "E"
         },
         {
@@ -2607,10 +2656,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_sockstat_TCP_inuse{instance=~'$node'}",
+          "editorMode": "code",
+          "expr": "sum by (instance, device) (node_sockstat_TCP_inuse{instance=~'$node'})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "TCP_inuse",
+          "range": true,
           "refId": "F"
         }
       ],
@@ -2750,10 +2801,12 @@
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "expr": "node_hwmon_temp_celsius{instance=\"$node\"}",
+          "editorMode": "code",
+          "expr": "sum by (instance, chip, sensor) (node_hwmon_temp_celsius{instance=\"$node\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{chip}} {{sensor}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -2836,6 +2889,6 @@
   "timezone": "browser",
   "title": "Compute Node Metrics - View Individual Node Information",
   "uid": "ac255358-acb4-490f-a480-262ec1436044",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
