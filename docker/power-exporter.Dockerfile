@@ -1,4 +1,4 @@
-FROM ruby:3.1.2
+FROM docker.io/ruby:3.1.2
 
 RUN apt-get update
 RUN apt-get install -y snmp pdsh

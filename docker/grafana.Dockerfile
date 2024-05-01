@@ -1,4 +1,4 @@
-FROM grafana/grafana-oss:10.2.2
+FROM docker.io/grafana/grafana-oss:10.2.2
 
 USER root
 COPY ./grafana/public/img/* /usr/share/grafana/public/img/
