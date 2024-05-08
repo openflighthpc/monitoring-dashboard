@@ -344,7 +344,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "sum by (job)(round(slurm_queue_completed/5, 1))",
+          "expr": "sum by (job)(slurm_queue_completed)",
           "instant": false,
           "interval": "1h",
           "legendFormat": "Completed",
@@ -357,7 +357,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "sum by (job) (round(slurm_queue_pending/5, 1))",
+          "expr": "sum by (job) (slurm_queue_pending)",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -371,7 +371,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "sum by (job) (round(slurm_queue_running/5, 1))",
+          "expr": "sum by (job) (slurm_queue_running)",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -385,7 +385,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "sum by (job) (round(slurm_queue_failed/5, 1))",
+          "expr": "sum by (job) (slurm_queue_failed)",
           "hide": false,
           "instant": false,
           "interval": "1h",
@@ -399,7 +399,7 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "sum by (job) (round(slurm_queue_cancelled/5, 1))",
+          "expr": "sum by (job) (slurm_queue_cancelled)",
           "hide": false,
           "instant": false,
           "interval": "1h",
