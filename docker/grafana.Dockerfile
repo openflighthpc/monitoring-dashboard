@@ -10,7 +10,7 @@ RUN find /usr/share/grafana/public/build/ -name *.js -exec sed -i 's|{target:"_b
 RUN find /usr/share/grafana/public/build/ -name *.js -exec sed -i 's|{target:"_blank",id:"updateVersion",text:"New version available!",icon:"download-alt",url:"https://grafana.com/grafana/download?utm_source=grafana_footer"}||g' {} \;
 
 RUN echo " #mega-menu-toggle { display: none !important; } .css-xv13ed { display: none !important; } .css-qlgu59 { display: none !important; } .css-adfkf4 { display: none !important; } .css-zanmp0 { display: none !important; } .css-15t8ss1 { display: none !important; } .css-a7i72f-toolbar-button { display: none !important; } .css-18j6u6t { display: none !important; }" >> /usr/share/grafana/public/build/grafana.light.bbe69ddb3979b7904078.css
-RUN echo " #mega-menu-toggle { display: none !important; } .css-xv13ed { display: none !important; } .css-qlgu59 { display: none !important; } .css-adfkf4 { display: none !important; } .css-zanmp0 { display: none !important; } .css-15t8ss1 { display: none !important; } .css-a7i72f-toolbar-button { display: none !important; } .css-18j6u6t { display: none !important; }" >> public/build/grafana.dark.170498723865582cad9d.css
+RUN echo " #mega-menu-toggle { display: none !important; } .css-xv13ed { display: none !important; } .css-qlgu59 { display: none !important; } .css-adfkf4 { display: none !important; } .css-zanmp0 { display: none !important; } .css-15t8ss1 { display: none !important; } .css-a7i72f-toolbar-button { display: none !important; } .css-18j6u6t { display: none !important; }" >> /usr/share/grafana/public/build/grafana.dark.170498723865582cad9d.css
 
 RUN mkdir -p /etc/grafana/dashboards
 RUN chown grafana:root /etc/grafana/dashboards
