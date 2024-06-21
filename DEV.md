@@ -3,26 +3,41 @@
 
 The dev workflow for making changes to the monitoring-dashboard requires two versions of Grafana. A dev version, and a staging/production version of Grafana. The changes made to the dev version of Grafana are exported and copied to the staging/production version.
 
-The following information describes the steps required to run a dev version of the Grafana Monitoring dashboard. After cloning the monitoring-dashboard repo as described here: https://github.com/openflighthpc/monitoring-dashboard/blob/master/README.md, implement the following steps:
+The following information describes the steps required to run a dev version of the Grafana Monitoring dashboard. 
 
-* In `monitoring-dashboard/grafana/custom.ini`, edit `org_role` to `Admin`
+## Installation
+Clone this git repository and checkout the desired branch / release.
 ```
-[auth.anonymous]
-enabled = true
-org_name = Main Org.
-org_role = Admin
-hide_version = true
+git clone https://github.com/gsangwell/monitoring-dashboard
+git checkout <branch/release>
 ```
 
-* In monitoring-dashboard/docker/grafana.Dockerfile, comment the following lines:
+Run the `install.sh` script with env variable `DEV=1`. Optionally, you can choose a custom install destination using the env variable `DEPLOY_PATH=<deploy-path>`. If no DEPLOY_PATH is set, the default install path of `/etc/alces-dashboard` will be used
+
 ```
-# RUN echo " #mega-menu-toggle { display: none !important; } .css-xv13ed { display: none !important; } .css-qlgu59 { display: none !important; } .css-adfkf4 { display: none !important; } .css-zanmp0 { display: none !important; } .css-15t8ss1 { display: none !important; } .css-a7i72f-toolbar-button { display: none !important; } .css-18j6u6t { display: none !important; }" >> /usr/share/grafana/public/build/grafana.light.bbe69ddb3979b7904078.css
-# RUN echo " #mega-menu-toggle { display: none !important; } .css-xv13ed { display: none !important; } .css-qlgu59 { display: none !important; } .css-adfkf4 { display: none !important; } .css-zanmp0 { display: none !important; } .css-15t8ss1 { display: none !important; } .css-a7i72f-toolbar-button { display: none !important; } .css-18j6u6t { display: none !important; }" >> /usr/share/grafana/public/build/grafana.dark.170498723865582cad9d.css
+cd monitoring-dashboard
+DEV=1 DEPLOY_PATH=<deploy-path> bash install.sh
 ```
 
-After the above steps have been completed, continue with the install, build, and execute instructions as described here: https://github.com/openflighthpc/monitoring-dashboard/blob/master/README.md
+Copy your SSL certificate and key.
+```
+cp /path/to/certificate <deploy-path>/certs/dashboard.crt
+cp /path/to/key <deploy-path>/certs/dashboard.key
+```
+
+## Build and Run containers
+Build and run the containers using the bash script. If you do not wish to use sssd configured on the host for authentication, update the build script to build use `docker/proxy-noauth.Dockerfile` instead. 
+```
+DEV=1 DEPLOY_PATH=<deploy-path> bash build.sh
+DEV=1 DEPLOY_PATH=<deploy-path> bash run.sh
+```
 
 # Edit Grafana dashboards
 After making the required changes to a Grafana dashboard, export that dashboard into a json through the website. This exported json can be pasted in the relevant dashboard section of the staging/production environment at: monitoring-dashboard/grafana/dashboards/
 
 A restart of Grafana is required to see the new changes reflected.
+
+## Stop and remove dashboard containers
+```
+DEV=1 bash clean.sh
+```
