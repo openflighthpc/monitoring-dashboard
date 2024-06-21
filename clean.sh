@@ -1,19 +1,25 @@
 #!/bin/bash
 
-docker stop alces-dashboard-grafana
-docker rm alces-dashboard-grafana
+if [[ -z "${DEV}" ]]; then
+  IMAGE_SUFFIX=""
+else
+  IMAGE_SUFFIX="-dev"
+fi
 
-docker stop alces-dashboard-proxy
-docker rm alces-dashboard-proxy
+docker stop alces-dashboard-grafana${IMAGE_SUFFIX}
+docker rm alces-dashboard-grafana${IMAGE_SUFFIX}
 
-docker stop alces-dashboard-metrics
-docker rm alces-dashboard-metrics
+docker stop alces-dashboard-proxy${IMAGE_SUFFIX}
+docker rm alces-dashboard-proxy${IMAGE_SUFFIX}
 
-docker stop alces-dashboard-metrics-downsampled
-docker rm alces-dashboard-metrics-downsampled
+docker stop alces-dashboard-metrics${IMAGE_SUFFIX}
+docker rm alces-dashboard-metrics${IMAGE_SUFFIX}
 
-docker stop alces-dashboard-downsampling
-docker rm alces-dashboard-downsampling
+docker stop alces-dashboard-metrics-downsampled${IMAGE_SUFFIX}
+docker rm alces-dashboard-metrics-downsampled${IMAGE_SUFFIX}
 
-docker stop alces-dashboard-power-exporter
-docker rm alces-dashboard-power-exporter
+docker stop alces-dashboard-downsampling${IMAGE_SUFFIX}
+docker rm alces-dashboard-downsampling${IMAGE_SUFFIX}
+
+docker stop alces-dashboard-power-exporter${IMAGE_SUFFIX}
+docker rm alces-dashboard-power-exporter${IMAGE_SUFFIX}
