@@ -4,12 +4,17 @@ if [[ -z "${DEPLOY_PATH}" ]]; then
   DEPLOY_PATH="/etc/alces-dashboard"
 fi
 
-
 # Grafana config
 mkdir -p ${DEPLOY_PATH}/grafana
 cp ./grafana/custom.ini ${DEPLOY_PATH}/grafana/custom.ini
 mkdir -p ${DEPLOY_PATH}/grafana/dashboards
 cp -R ./grafana/dashboards/* ${DEPLOY_PATH}/grafana/dashboards/
+
+if [[ ${DEV} -eq "1" ]]; then
+
+        sed -i 's/org_role = Viewer/org_role = Admin/g' ${DEPLOY_PATH}/grafana/custom.ini
+        sed -i 's/.*#mega-menu-toggle.*/#&/g' docker/grafana.Dockerfile
+fi
 
 # Metrics config
 mkdir -p ${DEPLOY_PATH}/metrics/{configs,targets}

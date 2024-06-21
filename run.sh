@@ -37,7 +37,7 @@ docker run -d -it \
 	--mount type=bind,source=${DEPLOY_PATH}/metrics/configs,target=/etc/victoria-metrics/configs \
 	--mount type=bind,source=${DEPLOY_PATH}/metrics/targets,target=/etc/victoria-metrics/targets \
 	--health-cmd='curl -s --fail http://localhost:8428/health || exit 1' \
-	alces-dashboard-metrics:latest${IMAGE_SUFFIX} \
+	alces-dashboard-metrics${IMAGE_SUFFIX}:latest \
 	--retentionPeriod=30d \
 	--httpListenAddr=localhost:8428 \
 	--dedup.minScrapeInterval=60s \

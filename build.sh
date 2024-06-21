@@ -10,8 +10,8 @@ if [[ -z "${DEV}" ]]; then
 
 else
 
-    docker build -t alces-dashboard-grafana-dev --network host -f ./docker/grafana.Dockerfile ./docker/
-    docker build -t alces-dashboard-proxy-dev --network host -f ./docker/proxy.Dockerfile ./docker/
+    docker build -t alces-dashboard-grafana-dev --network host --build-arg DEV=1  -f ./docker/grafana.Dockerfile ./docker/
+    docker build -t alces-dashboard-proxy-dev --network host -f ./docker/proxy-noauth.Dockerfile ./docker/
     docker build -t alces-dashboard-metrics-dev --network host -f ./docker/metrics.Dockerfile ./docker/
     docker build -t alces-dashboard-downsampling-dev --network host -f ./docker/downsampling.Dockerfile ./docker/
     docker build -t alces-dashboard-power-exporter-dev --network host -f ./docker/power-exporter.Dockerfile ./docker/
