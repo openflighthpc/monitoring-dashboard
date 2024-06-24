@@ -73,7 +73,7 @@ DEPLOY_PATH=<staging-deploy-path> bash run.sh
 ```
 
 ## 7) Verify changes in staging environment
-Make sure that changes pushed to dev-branch are applied and working properly in staging environment. If changes are not working properly, staging environment can be shutdown using `bash clean.sh`. Further, dev environment can again be started using build.sh and run.sh scripts as described above.
+Make sure that changes pushed to dev-branch are applied and working properly in staging environment. If changes are not working properly, staging environment can be shutdown using `bash clean.sh`. Further, dev environment can again be started using build.sh and run.sh scripts as described above in point no 2.
 
 ## 8) Stop and remove staging dashboard containers
 ```
