@@ -13,7 +13,6 @@ cp -R ./grafana/dashboards/* ${DEPLOY_PATH}/grafana/dashboards/
 if [[ ${DEV} -eq "1" ]]; then
 
         sed -i 's/org_role = Viewer/org_role = Admin/g' ${DEPLOY_PATH}/grafana/custom.ini
-        sed -i 's/.*#mega-menu-toggle.*/#&/g' docker/grafana.Dockerfile
 fi
 
 # Metrics config
