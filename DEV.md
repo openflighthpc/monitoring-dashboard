@@ -81,4 +81,4 @@ bash clean.sh
 ```
 
 ## 9) Create Pull Request from Github
-Open https://github.com/openflighthpc/monitoring-dashboard/compare/master...<dev-branch> , and create a new Pull Request for review.
+Open `https://github.com/openflighthpc/monitoring-dashboard/compare/master...<dev-branch>` , and create a new Pull Request for review.
