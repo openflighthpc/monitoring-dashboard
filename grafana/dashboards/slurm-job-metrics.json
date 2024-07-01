@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
-  "id": 9,
+  "id": 11,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -517,7 +517,7 @@
         },
         "textMode": "auto",
         "wideLayout": true
-      },
+     P1+r[24~\P0+r\P0+r\P1+r\P0+r\P1+r[3~\P1+rOH\P1+rOF\P1+r[5~\P1+r[6~\ },
       "pluginVersion": "",
       "targets": [
         {
@@ -1030,7 +1030,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "text"
+                "color": "text",
+                "value": null
               }
             ]
           }
@@ -1052,7 +1053,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "red"
+                      "color": "red",
+                      "value": null
                     },
                     {
                       "color": "orange",
@@ -1087,7 +1089,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "red"
+                      "color": "red",
+                      "value": null
                     },
                     {
                       "color": "orange",
@@ -1139,6 +1142,18 @@
               {
                 "id": "unit",
                 "value": "currencyGBP"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Wait Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
               }
             ]
           }
@@ -1197,6 +1212,7 @@
               "job": true,
               "nodes": false,
               "runtime": false,
+              "runtime_sec": true,
               "user": true
             },
             "indexByName": {
@@ -1230,7 +1246,8 @@
               "nodes": "Allocated Nodes",
               "partition": "Partition",
               "runtime": "Walltime",
-              "state": "State"
+              "state": "State",
+              "wait_time": "Wait Time"
             }
           }
         },
@@ -1471,6 +1488,6 @@
   "timezone": "",
   "title": "Slurm Job Metrics (by Account/User)",
   "uid": "d0cad303-0639-426e-a54a-3ab6faabddf5",
-  "version": 14,
+  "version": 8,
   "weekStart": ""
 }
