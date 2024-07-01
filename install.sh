@@ -5,6 +5,8 @@ mkdir -p /etc/alces-dashboard/grafana
 cp ./grafana/custom.ini /etc/alces-dashboard/grafana/custom.ini
 mkdir -p /etc/alces-dashboard/grafana/dashboards
 cp -R ./grafana/dashboards/* /etc/alces-dashboard/grafana/dashboards/
+mkdir -p /etc/alces-dashboard/grafana/provisioning
+cp -R ./grafana/provisioning/* /etc/alces-dashboard/grafana/provisioning/
 
 # Metrics config
 mkdir -p /etc/alces-dashboard/metrics/{configs,targets}

@@ -7,6 +7,7 @@ docker run -d -it \
 	--volume grafana-data:/var/lib/grafana \
 	--mount type=bind,source=/etc/alces-dashboard/grafana/custom.ini,target=/etc/grafana/grafana.ini \
 	--mount type=bind,source=/etc/alces-dashboard/grafana/dashboards,target=/etc/grafana/dashboards \
+	--mount type=bind,source=/etc/alces-dashboard/grafana/provisioning,target=/etc/grafana/provisioning \
 	--health-cmd='curl -s --fail http://localhost:3000 || exit 1' \
 	alces-dashboard-grafana:latest
 

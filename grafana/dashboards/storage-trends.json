@@ -69,7 +69,7 @@
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -364,6 +364,6 @@
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
