@@ -34,7 +34,7 @@
         "uid": "P3D096F30CDAF9ECC"
       },
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 10,
         "x": 0,
         "y": 0
@@ -400,10 +400,10 @@
         ]
       },
       "gridPos": {
-        "h": 25,
+        "h": 23,
         "w": 10,
         "x": 0,
-        "y": 6
+        "y": 8
       },
       "id": 139,
       "options": {
@@ -1063,6 +1063,6 @@
   "timezone": "",
   "title": "Compute Node Allocation",
   "uid": "f9efc249-2fa1-4a92-a90a-a41bc1890723",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
