@@ -1,26 +1,31 @@
 #!/bin/bash
 
+if [[ -z "${DEPLOY_PATH}" ]]; then
+  DEPLOY_PATH="/etc/alces-dashboard"
+fi
+
 # Grafana config
-mkdir -p /etc/alces-dashboard/grafana
-cp ./grafana/custom.ini /etc/alces-dashboard/grafana/custom.ini
-cp ./grafana/home.json /etc/alces-dashboard/grafana/home.json
-mkdir -p /etc/alces-dashboard/grafana/dashboards
-cp -R ./grafana/dashboards/* /etc/alces-dashboard/grafana/dashboards/
-mkdir -p /etc/alces-dashboard/grafana/provisioning
-cp -R ./grafana/provisioning/* /etc/alces-dashboard/grafana/provisioning/
+mkdir -p ${DEPLOY_PATH}/grafana
+cp ./grafana/custom.ini ${DEPLOY_PATH}/grafana/custom.ini
+cp ./grafana/home.json ${DEPLOY_PATH}/grafana/home.json
+mkdir -p ${DEPLOY_PATH}/grafana/dashboards
+cp -R ./grafana/dashboards/* ${DEPLOY_PATH}/grafana/dashboards/
+mkdir -p ${DEPLOY_PATH}/grafana/provisioning
+cp -R ./grafana/provisioning/* ${DEPLOY_PATH}/grafana/provisioning/
 
 # Metrics config
-mkdir -p /etc/alces-dashboard/metrics/{configs,targets}
-cp ./metrics/configs/* /etc/alces-dashboard/metrics/configs
-cp ./metrics/targets/* /etc/alces-dashboard/metrics/targets
+mkdir -p ${DEPLOY_PATH}/metrics/{configs,targets}
+cp ./metrics/configs/* ${DEPLOY_PATH}/metrics/configs
+cp ./metrics/targets/* ${DEPLOY_PATH}/metrics/targets
 
 # Downsample config
-mkdir -p /etc/alces-dashboard/downsampling/rules
-cp -R ./downsampling/rules/* /etc/alces-dashboard/downsampling/rules/
+mkdir -p ${DEPLOY_PATH}/downsampling/rules
+cp -R ./downsampling/rules/* ${DEPLOY_PATH}/downsampling/rules/
 
 # Power exporter config
-mkdir -p /etc/alces-dashboard/power-exporter/
-cp -R ./power-exporter/* /etc/alces-dashboard/power-exporter/
+mkdir -p ${DEPLOY_PATH}/power-exporter/
+cp -R ./power-exporter/* ${DEPLOY_PATH}/power-exporter/
 
 # Nginx certs
-mkdir -p /etc/alces-dashboard/certs
+mkdir -p ${DEPLOY_PATH}/certs
+
