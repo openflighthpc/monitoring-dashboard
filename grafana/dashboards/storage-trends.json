@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 13,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -32,6 +31,13 @@
         "defaults": {
           "color": {
             "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
           },
           "decimals": 2,
           "mappings": [],
@@ -59,28 +65,26 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 11,
         "w": 12,
         "x": 0,
         "y": 0
       },
       "id": 3,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
           "fields": "",
-          "values": false
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
-        "textMode": "value_and_name",
-        "wideLayout": true
+        "frameIndex": 1,
+        "showHeader": true
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -88,16 +92,79 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "editorMode": "code",
-          "expr": "1.0 - (filesystem_free_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_size_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
+          "exemplar": false,
+          "expr": "last_over_time(1.0 - (filesystem_free_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_size_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}))",
+          "format": "table",
           "instant": false,
           "interval": "1h",
           "legendFormat": "{{mountpoint}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "last_over_time(1.0 - (filesystem_files_free{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_files{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}))",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "interval": "1h",
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Current Usage",
-      "type": "stat"
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "mountpoint",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value #A": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #B": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "mountpoint": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #A (lastNotNull)": "Storage",
+              "Value #B (lastNotNull)": "Files",
+              "mountpoint": "Mountpoint"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
@@ -105,7 +172,7 @@
         "uid": "P27AA5C6EF93B953C"
       },
       "gridPos": {
-        "h": 9,
+        "h": 11,
         "w": 12,
         "x": 12,
         "y": 0
@@ -120,7 +187,7 @@
         "content": "This dashboard provides an overview of your cluster filesystem usage over the selected time period.",
         "mode": "markdown"
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "title": "Description",
       "type": "text"
     },
@@ -129,7 +196,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 11
       },
       "id": 2,
       "title": "Graphs",
@@ -203,7 +270,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 12
       },
       "id": 1,
       "options": {
@@ -219,6 +286,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -309,7 +377,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 31
       },
       "id": 5,
       "options": {
@@ -325,6 +393,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -349,7 +418,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [
     "Long Term Metrics (2 Year Retention)"
   ],
@@ -360,10 +429,11 @@
     "from": "now-30d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
