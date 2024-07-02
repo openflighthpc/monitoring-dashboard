@@ -38,8 +38,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 80
               }
             ]
           },
@@ -101,8 +109,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 80
               }
             ]
           },
@@ -732,6 +748,6 @@
   "timezone": "",
   "title": "Slurm Job Trends",
   "uid": "ab48c398-e1d7-4a84-8fb7-3792ddd25923",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
