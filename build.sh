@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLUSTER_TRENDS_TAG="2024.0.1"
+CLUSTER_TRENDS_TAG="2024.0.2"
 
 git clone https://github.com/alces-software/flight-cluster-trends.git /tmp/flight-cluster-trends
 pushd /tmp/flight-cluster-trends
