@@ -619,7 +619,7 @@
           "calcs": [
             "mean"
           ],
-          "fields": "/^runtime_sec$/",
+          "fields": "/.*/",
           "values": false
         },
         "textMode": "auto",
@@ -1209,7 +1209,7 @@
               "job": true,
               "nodes": false,
               "runtime": false,
-	      "runtime_sec": true,
+	      "runtime_sec": false,
               "user": true
             },
             "indexByName": {
@@ -1244,6 +1244,7 @@
               "partition": "Partition",
               "runtime": "Walltime",
               "state": "State",
+	      "runtime_sec": "Run Time",
 	      "wait_time": "Wait Time"
             }
           }
