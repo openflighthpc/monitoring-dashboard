@@ -3,6 +3,7 @@
 # Grafana config
 mkdir -p /etc/alces-dashboard/grafana
 cp ./grafana/custom.ini /etc/alces-dashboard/grafana/custom.ini
+cp ./grafana/home.json /etc/alces-dashboard/grafana/home.json
 mkdir -p /etc/alces-dashboard/grafana/dashboards
 cp -R ./grafana/dashboards/* /etc/alces-dashboard/grafana/dashboards/
 mkdir -p /etc/alces-dashboard/grafana/provisioning
