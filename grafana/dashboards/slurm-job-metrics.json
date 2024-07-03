@@ -1141,6 +1141,18 @@
                 "value": "currencyGBP"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Wait Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              }
+            ]
           }
         ]
       },
@@ -1197,6 +1209,7 @@
               "job": true,
               "nodes": false,
               "runtime": false,
+	      "runtime_sec": true,
               "user": true
             },
             "indexByName": {
@@ -1230,7 +1243,8 @@
               "nodes": "Allocated Nodes",
               "partition": "Partition",
               "runtime": "Walltime",
-              "state": "State"
+              "state": "State",
+	      "wait_time": "Wait Time"
             }
           }
         },
