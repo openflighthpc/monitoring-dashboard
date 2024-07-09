@@ -806,7 +806,7 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true
+  [?12;2$y        "showLegend": true
         },
         "orientation": "auto",
         "showValue": "auto",
