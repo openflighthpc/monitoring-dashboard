@@ -361,18 +361,18 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
-      "description": "Job allocations corresponding to number of cpus requested",
+      "description": "Number of jobs by CPUs allocated.",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "blue",
+            "mode": "fixed"
           },
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "left",
             "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
@@ -394,16 +394,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "blue",
                 "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
               }
             ]
           },
@@ -430,7 +422,7 @@
           "showLegend": true
         },
         "orientation": "auto",
-        "showValue": "auto",
+        "showValue": "always",
         "stacking": "none",
         "tooltip": {
           "maxHeight": 600,
@@ -453,7 +445,7 @@
           "withTransforms": true
         }
       ],
-      "title": "Job allocations per cpu",
+      "title": "Job Allocations by CPUs",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -501,6 +493,28 @@
                 ],
                 "operation": "aggregate"
               }
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Allocated CPUs"
+              }
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Count (sum)": "Job Allocations"
             }
           }
         }
@@ -734,7 +748,7 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
-      "description": "Job allocations corresponding to number of nodes requested",
+      "description": "Number of jobs by nodes allocated.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -744,8 +758,7 @@
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
+            "axisColorMode": "text",
             "axisPlacement": "auto",
             "fillOpacity": 80,
             "gradientMode": "none",
@@ -768,16 +781,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
+                "color": "blue",
                 "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
               }
             ]
           },
@@ -827,7 +832,7 @@
           "withTransforms": true
         }
       ],
-      "title": "Job allocations per node",
+      "title": "Job Allocations by Nodes",
       "transformations": [
         {
           "id": "filterFieldsByName",
@@ -879,6 +884,28 @@
                 ],
                 "operation": "aggregate"
               }
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Allocated Nodes"
+              }
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Count (sum)": "Job Allocations"
             }
           }
         }
@@ -1168,6 +1195,18 @@
                 "value": "dthms"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Run Time"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
           }
         ]
       },
@@ -1189,7 +1228,12 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "CPU Efficiency"
+          }
+        ]
       },
       "pluginVersion": "11.0.0",
       "targets": [
@@ -1366,8 +1410,10 @@
               "Allocated Memory": true,
               "Allocated Nodes": true,
               "CPU Efficiency": true,
-              "Memory Utilisation": true
+              "Memory Utilisation": true,
+              "Run Time": false
             },
+            "includeByName": {},
             "indexByName": {
               "Allocated CPUs": 5,
               "Allocated CPUs numeric": 6,
@@ -1390,7 +1436,8 @@
               "Allocated Memory numeric": "Allocated Memory",
               "Allocated Nodes numeric": "Allocated Nodes",
               "CPU Efficiency numeric": "CPU Efficiency",
-              "Memory Utilisation numeric": "Memory Utilisation"
+              "Memory Utilisation numeric": "Memory Utilisation",
+              "Walltime": "Wall Time"
             }
           }
         }
@@ -1502,6 +1549,6 @@
   "timezone": "",
   "title": "Slurm Job Metrics (by Account/User)",
   "uid": "d0cad303-0639-426e-a54a-3ab6faabddf5",
-  "version": 10,
+  "version": 13,
   "weekStart": ""
 }
