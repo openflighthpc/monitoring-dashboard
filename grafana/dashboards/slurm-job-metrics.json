@@ -35,7 +35,7 @@
       "gridPos": {
         "h": 7,
         "w": 24,
-        "x": 0,
+        "x": P1+r[24~\P0+r\P0+r\P1+r\P0+r\P1+r[3~\P1+rOH\P1+rOF\P1+r[5~\P1+r[6~\0,
         "y": 0
       },
       "id": 22,
@@ -903,7 +903,7 @@
           "options": {
             "excludeByName": {},
             "includeByName": {},
-         P1+r[24~\P0+r\P0+r\P1+r\P0+r\P1+r[3~\P1+rOH\   "indexByName": {},
+            "indexByName": {},
             "renameByName": {
               "Count (sum)": "Job Allocations"
             }
@@ -934,7 +934,7 @@
               },
               {
                 "color": "#EAB839",
-    P1+rOF\P1+r[5~\P1+r[6~\            "value": 50
+                "value": 50
               },
               {
                 "color": "green",
