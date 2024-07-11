@@ -410,6 +410,546 @@
       ],
       "title": "Slurm Jobs",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Job submissions per day corresponding to the day a job was submitted",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "displayName": "Job Submission Count",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 10,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "day",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\", day=~\"Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday\"}[$__range])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "alias": "day",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "f9e03741-b41d-4ad4-ab74-3cedfe045af2"
+          },
+          "refId": "B",
+          "scenarioId": "csv_metric_values",
+          "stringInput": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"
+        }
+      ],
+      "title": "Job Submissions per day",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "day"
+              ]
+            }
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "day"
+              ],
+              "reducer": "count"
+            }
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "day": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "B"
+          },
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "day",
+                "time"
+              ]
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "day",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": false,
+                "field": "time"
+              }
+            ]
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count (sum)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "day": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Job submissions per hour corresponding to the day a job was submitted",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "displayName": "Job Submission Count",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "hour"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 0,
+                        "text": "00:00"
+                      },
+                      "1": {
+                        "index": 1,
+                        "text": "01:00"
+                      },
+                      "2": {
+                        "index": 2,
+                        "text": "02:00"
+                      },
+                      "3": {
+                        "index": 3,
+                        "text": "03:00"
+                      },
+                      "4": {
+                        "index": 4,
+                        "text": "04:00"
+                      },
+                      "5": {
+                        "index": 5,
+                        "text": "05:00"
+                      },
+                      "6": {
+                        "index": 6,
+                        "text": "06:00"
+                      },
+                      "7": {
+                        "index": 7,
+                        "text": "07:00"
+                      },
+                      "8": {
+                        "index": 8,
+                        "text": "08:00"
+                      },
+                      "9": {
+                        "index": 9,
+                        "text": "09:00"
+                      },
+                      "10": {
+                        "index": 10,
+                        "text": "10:00"
+                      },
+                      "11": {
+                        "index": 11,
+                        "text": "11:00"
+                      },
+                      "12": {
+                        "index": 12,
+                        "text": "12:00"
+                      },
+                      "13": {
+                        "index": 13,
+                        "text": "13:00"
+                      },
+                      "14": {
+                        "index": 14,
+                        "text": "14:00"
+                      },
+                      "15": {
+                        "index": 15,
+                        "text": "15:00"
+                      },
+                      "16": {
+                        "index": 16,
+                        "text": "16:00"
+                      },
+                      "17": {
+                        "index": 17,
+                        "text": "17:00"
+                      },
+                      "18": {
+                        "index": 18,
+                        "text": "18:00"
+                      },
+                      "19": {
+                        "index": 19,
+                        "text": "19:00"
+                      },
+                      "20": {
+                        "index": 20,
+                        "text": "20:00"
+                      },
+                      "21": {
+                        "index": 21,
+                        "text": "21:00"
+                      },
+                      "22": {
+                        "index": 22,
+                        "text": "22:00"
+                      },
+                      "23": {
+                        "index": 23,
+                        "text": "23:00"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 11,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.8,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "hour",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\", hour=~\"0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23\"}[$__range])",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "alias": "hour",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "f9e03741-b41d-4ad4-ab74-3cedfe045af2"
+          },
+          "refId": "B",
+          "scenarioId": "csv_metric_values",
+          "stringInput": "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
+        }
+      ],
+      "title": "Job Submissions per hour",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "hour"
+              ]
+            }
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "B"
+          },
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "hour"
+              ]
+            }
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "hour"
+              ],
+              "reducer": "count"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count": {
+                "aggregations": [
+                  "count"
+                ],
+                "operation": "aggregate"
+              },
+              "day": {
+                "aggregations": []
+              },
+              "hour": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "hour",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count (count)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "hour": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        }
+      ],
+      "type": "barchart"
     }
   ],
   "refresh": "",
@@ -428,6 +968,6 @@
   "timezone": "",
   "title": "Slurm Scheduler Trends",
   "uid": "fd12849a-ee90-42ba-8e1f-3a0951d6847a",
-  "version": 5,
+  "version": 1,
   "weekStart": ""
 }
