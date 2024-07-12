@@ -494,12 +494,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P27AA5C6EF93B953C"
+            "uid": "P3D096F30CDAF9ECC"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\", day=~\"Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday\"}[$__range])",
+          "expr": "slurm_job_time",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -515,6 +515,7 @@
             "type": "grafana-testdata-datasource",
             "uid": "f9e03741-b41d-4ad4-ab74-3cedfe045af2"
           },
+          "hide": false,
           "refId": "B",
           "scenarioId": "csv_metric_values",
           "stringInput": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"
@@ -529,72 +530,17 @@
           },
           "id": "filterFieldsByName",
           "options": {
-            "byVariable": false,
-            "include": {
-              "names": [
-                "day"
-              ]
-            }
-          }
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "A"
-          },
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "day"
-              ],
-              "reducer": "count"
-            }
-          }
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "A"
-          },
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Count": {
-                "aggregations": [
-                  "sum"
-                ],
-                "operation": "aggregate"
-              },
-              "day": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        },
-        {
-          "filter": {
-            "id": "byRefId",
-            "options": "B"
-          },
-          "id": "filterFieldsByName",
-          "options": {
             "include": {
               "names": [
                 "day",
-                "time"
+                "Value"
               ]
             }
           }
         },
         {
-          "id": "joinByField",
-          "options": {
-            "byField": "day",
-            "mode": "outerTabular"
-          }
+          "id": "merge",
+          "options": {}
         },
         {
           "id": "sortBy",
@@ -612,7 +558,7 @@
           "id": "groupBy",
           "options": {
             "fields": {
-              "Count (sum)": {
+              "Value": {
                 "aggregations": [
                   "sum"
                 ],
@@ -830,12 +776,12 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P27AA5C6EF93B953C"
+            "uid": "P3D096F30CDAF9ECC"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\", hour=~\"0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23\"}[$__range])",
+          "expr": "slurm_job_time",
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -868,40 +814,28 @@
             "byVariable": false,
             "include": {
               "names": [
-                "hour"
+                "hour",
+                "Value"
               ]
             }
           }
         },
         {
-          "filter": {
-            "id": "byRefId",
-            "options": "B"
-          },
-          "id": "filterFieldsByName",
+          "id": "joinByField",
           "options": {
-            "include": {
-              "names": [
-                "hour"
-              ]
-            }
+            "byField": "hour",
+            "mode": "outer"
           }
         },
         {
-          "filter": {
-            "id": "byRefId",
-            "options": "A"
-          },
-          "id": "calculateField",
+          "id": "sortBy",
           "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "hour"
-              ],
-              "reducer": "count"
-            },
-            "replaceFields": false
+            "fields": {},
+            "sort": [
+              {
+                "field": "time"
+              }
+            ]
           }
         },
         {
@@ -914,32 +848,14 @@
                 ],
                 "operation": "aggregate"
               },
-              "day": {
-                "aggregations": []
-              },
-              "hour": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        },
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "hour",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Count (count)": {
+              "Value": {
                 "aggregations": [
                   "sum"
                 ],
                 "operation": "aggregate"
+              },
+              "day": {
+                "aggregations": []
               },
               "hour": {
                 "aggregations": [],
@@ -968,6 +884,6 @@
   "timezone": "",
   "title": "Slurm Scheduler Trends",
   "uid": "fd12849a-ee90-42ba-8e1f-3a0951d6847a",
-  "version": 1,
+  "version": 456,
   "weekStart": ""
 }
