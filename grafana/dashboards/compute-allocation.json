@@ -46,7 +46,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "## Overview\n\nThis dashboard provides an overview of your scheduler allocation during your selected time period. Note: All totals also include any nodes currently unavailable due to maintenance or onboarding.\n\n- The graphs to the right provide an overview over time of your total cluster resource versus that allocated by your scheduler.\n- The table below represents the average allocation in % of each resource on a per node basis.",
+        "content": "## Overview\n\nThis dashboard provides an overview of your scheduler allocation during the selected time period. Note: All totals also include any nodes currently unavailable due to maintenance or onboarding.\n\n- The graphs to the right provide an overview over time of your total cluster resource versus that allocated by your scheduler.\n- The table below represents the average allocation of each resource on a per node basis.",
         "mode": "markdown"
       },
       "pluginVersion": "10.2.2",
@@ -789,7 +789,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
-      "description": "The number of cores allocated versus the total number of cores in the cluster. (Total includes any nodes unavailable due to maintenance or onboarding).",
+      "description": "The percentage of cores allocated versus the average CPU usage of the cluster. (Totals include any nodes unavailable due to maintenance or onboarding).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -903,7 +903,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
-      "description": "The amount of memory allocated versus the total amount of memory in the cluster. (Total includes any nodes unavailable due to maintenance or onboarding).",
+      "description": "The percentage of memory allocated versus the average memory usage of the cluster. (Totals include any nodes unavailable due to maintenance or onboarding).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1063,6 +1063,6 @@
   "timezone": "",
   "title": "Compute Node Allocation",
   "uid": "f9efc249-2fa1-4a92-a90a-a41bc1890723",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
