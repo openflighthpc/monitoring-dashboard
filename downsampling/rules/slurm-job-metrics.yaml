@@ -7,3 +7,5 @@ groups:
         expr: avg by (user, account) (last_over_time((slurm_job_cpu_eff != Inf)[1h]))
       - record: slurm_job_mem_util
         expr: avg by (user, account) (last_over_time((slurm_job_mem_util != Inf)[1h]))
+      - record: slurm_job_time
+        expr: count by(day, hour) (last_over_time(slurm_job_meta{day=~"Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday"}[1h]))
