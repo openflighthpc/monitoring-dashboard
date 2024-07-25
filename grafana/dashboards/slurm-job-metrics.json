@@ -1304,8 +1304,11 @@
               "runtime": "Walltime",
               "runtime_sec": "Run Time",
               "state": "State",
-              "wait_time": "Wait Time"
-            }
+              "wait_time": "Wait Time",
+	      "date": "Date",
+	      "day": "Day",
+	      "hour": "Hour"
+	    }
           }
         },
         {
@@ -1411,7 +1414,10 @@
               "Allocated Nodes": true,
               "CPU Efficiency": true,
               "Memory Utilisation": true,
-              "Run Time": false
+              "Run Time": false,
+	      "Date": true,
+	      "Day": true,
+	      "Hour": true
             },
             "includeByName": {},
             "indexByName": {
@@ -1549,6 +1555,6 @@
   "timezone": "",
   "title": "Slurm Job Metrics (by Account/User)",
   "uid": "d0cad303-0639-426e-a54a-3ab6faabddf5",
-  "version": 13,
+  "version": 14,
   "weekStart": ""
 }
