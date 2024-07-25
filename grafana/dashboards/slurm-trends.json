@@ -508,17 +508,6 @@
           "range": false,
           "refId": "A",
           "useBackend": false
-        },
-        {
-          "alias": "day",
-          "datasource": {
-            "type": "grafana-testdata-datasource",
-            "uid": "f9e03741-b41d-4ad4-ab74-3cedfe045af2"
-          },
-          "hide": false,
-          "refId": "B",
-          "scenarioId": "csv_metric_values",
-          "stringInput": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"
         }
       ],
       "title": "Job Submissions per day",
@@ -790,16 +779,6 @@
           "range": false,
           "refId": "A",
           "useBackend": false
-        },
-        {
-          "alias": "hour",
-          "datasource": {
-            "type": "grafana-testdata-datasource",
-            "uid": "f9e03741-b41d-4ad4-ab74-3cedfe045af2"
-          },
-          "refId": "B",
-          "scenarioId": "csv_metric_values",
-          "stringInput": "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23"
         }
       ],
       "title": "Job Submissions per hour",
@@ -884,6 +863,6 @@
   "timezone": "",
   "title": "Slurm Scheduler Trends",
   "uid": "fd12849a-ee90-42ba-8e1f-3a0951d6847a",
-  "version": 456,
+  "version": 6,
   "weekStart": ""
 }
