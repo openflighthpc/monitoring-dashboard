@@ -28,7 +28,8 @@ docker run -d -it \
 	--health-cmd='curl -s --fail http://localhost:3000 || exit 1' \
 	alces-dashboard-grafana${IMAGE_SUFFIX}:latest
 
-docker run -d -it \
+if [[ "${ENABLE_PROXY}" == "yes" ]] ; then
+	docker run -d -it \
 	--network host \
 	--restart ${RESTART_POLICY} \
 	--name alces-dashboard-proxy${IMAGE_SUFFIX} \
@@ -36,6 +37,7 @@ docker run -d -it \
 	--mount type=bind,source=/var/lib/sss/pipes,target=/var/lib/sss/pipes \
 	--health-cmd='curl -s --fail http://localhost:80 || exit 1' \
 	alces-dashboard-proxy${IMAGE_SUFFIX}:latest
+fi
 
 if [[ -z "${DATA_PATH}" ]] ; then
 	docker run -d -it \
