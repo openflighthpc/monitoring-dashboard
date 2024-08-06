@@ -31,7 +31,8 @@ docker run -d -it \
 	--health-cmd='curl -s --fail http://localhost:80 || exit 1' \
 	alces-dashboard-proxy${IMAGE_SUFFIX}:latest
 
-docker run -d -it \
+if [[ -z "${DATA_PATH}" ]] ; then
+	docker run -d -it \
 	--network host \
 	--restart unless-stopped \
 	--name alces-dashboard-metrics${IMAGE_SUFFIX} \
@@ -46,7 +47,7 @@ docker run -d -it \
 	--promscrape.config=/etc/victoria-metrics/prometheus.yml \
 	--promscrape.configCheckInterval=60s
 
-docker run -d -it \
+	docker run -d -it \
 	--network host \
 	--restart unless-stopped \
 	--name alces-dashboard-metrics-downsampled${IMAGE_SUFFIX} \
@@ -57,6 +58,37 @@ docker run -d -it \
 	--httpListenAddr=localhost:8429 \
 	--dedup.minScrapeInterval=3600s \
 	--promscrape.configCheckInterval=60s
+else
+	mkdir -p ${DATA_PATH}/metrics
+	mkdir -p ${DATA_PATH}/metrics-downsampled
+
+	docker run -d -it \
+        --network host \
+        --restart unless-stopped \
+        --name alces-dashboard-metrics${IMAGE_SUFFIX} \
+        --volume ${DATA_PATH}/metrics:/victoria-metrics-data \
+        --mount type=bind,source=${DEPLOY_PATH}/metrics/configs,target=/etc/victoria-metrics/configs \
+        --mount type=bind,source=${DEPLOY_PATH}/metrics/targets,target=/etc/victoria-metrics/targets \
+        --health-cmd='curl -s --fail http://localhost:8428/health || exit 1' \
+        alces-dashboard-metrics${IMAGE_SUFFIX}:latest \
+        --retentionPeriod=30d \
+        --httpListenAddr=localhost:8428 \
+        --dedup.minScrapeInterval=60s \
+        --promscrape.config=/etc/victoria-metrics/prometheus.yml \
+        --promscrape.configCheckInterval=60s
+
+	docker run -d -it \
+        --network host \
+        --restart unless-stopped \
+        --name alces-dashboard-metrics-downsampled${IMAGE_SUFFIX} \
+        --volume ${DATA_PATH}/metrics-downsampled:/victoria-metrics-data \
+        --health-cmd='curl -s --fail http://localhost:8429/health || exit 1' \
+        alces-dashboard-metrics${IMAGE_SUFFIX}:latest \
+        --retentionPeriod=730d \
+        --httpListenAddr=localhost:8429 \
+        --dedup.minScrapeInterval=3600s \
+        --promscrape.configCheckInterval=60s
+fi
 
 docker run -d -it \
 	--network host \
