@@ -1,10 +1,14 @@
 scheduler:
-  noop:
+  slurm:
     enabled: true
+    schedulers:
+      dashboard01:
+        sinfo_bin: /bin/sinfo
 methods:
   snmpv2:
     community: public
 logging:
   path: /var/log/power-exporter/exporter.log
 exporter:
+  ssh_key: etc/id_powerexporter
   port: 9106
