@@ -1,8 +1,19 @@
 - targets:
   - dashboard01:9100
+  - master1:9100
   labels:
     node_type: core
 - targets:
+  - nfs1:9100
+  labels:
+    node_type: storage
+- targets:
+  - login1:9100
+  labels:
+    node_type: login
+- targets:
   - node01:9100
+  - node02:9100
+  - gpu01:9100
   labels:
     node_type: compute
