@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -84,7 +85,7 @@
         "frameIndex": 1,
         "showHeader": true
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "10.2.2",
       "targets": [
         {
           "datasource": {
@@ -187,16 +188,559 @@
         "content": "This dashboard provides an overview of your cluster filesystem usage over the selected time period.",
         "mode": "markdown"
       },
-      "pluginVersion": "11.0.0",
+      "pluginVersion": "10.2.2",
       "title": "Description",
       "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P3D096F30CDAF9ECC"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "files_used_fraction"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.75
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+28
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Infinity": {
+                        "index": 0,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "match": "nan",
+                      "result": {
+                        "index": 1,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              },
+              {
+                "id": "max",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 6,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time({__name__=~\"files_used|files_limit|files_quota\"}[$__interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Highest File Usage",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "mount_path",
+              "user"
+            ]
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "files_limit": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "files_quota": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "files_used": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "mount_path": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "user": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "files_used_fraction",
+            "binary": {
+              "left": "files_used (last)",
+              "operator": "/",
+              "right": "files_quota (last)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "blocks_limit": true,
+              "blocks_quota": true,
+              "blocks_used": true,
+              "files_limit": true,
+              "files_limit (last)": false,
+              "files_quota": true,
+              "files_quota (last)": false,
+              "files_used": true,
+              "files_used (last)": false
+            },
+            "indexByName": {
+              "files_limit (last)": 5,
+              "files_quota (last)": 4,
+              "files_used (last)": 3,
+              "files_used_fraction": 2,
+              "mount_path": 1,
+              "user": 0
+            },
+            "renameByName": {
+              "files_limit (last)": "Files Limit",
+              "files_quota (last)": "Files Quota",
+              "files_used (last)": "Files Used",
+              "files_used_fraction": "Files Usage %",
+              "mount_path": "Mount Path",
+              "user": "User"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "Files Usage %"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P3D096F30CDAF9ECC"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "blocks_used_fraction"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "#EAB839",
+                      "value": 0.75
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+28
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Infinity": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "match": "nan",
+                      "result": {
+                        "color": "text",
+                        "index": 1,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              },
+              {
+                "id": "max",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 7,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time({__name__=~\"blocks_used|blocks_quota|blocks_limit\"}[$__interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Highest Block Usage",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "mount_path",
+              "user"
+            ]
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "blocks_limit": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "blocks_quota": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "blocks_used": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "files_limit": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "files_quota": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "files_used": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "mount_path": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "user": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "blocks_used_fraction",
+            "binary": {
+              "left": "blocks_used (last)",
+              "operator": "/",
+              "right": "blocks_quota (last)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "blocks_limit": true,
+              "blocks_limit (last)": false,
+              "blocks_quota": true,
+              "blocks_quota (last)": false,
+              "blocks_quota_adjusted": false,
+              "blocks_used": true,
+              "blocks_used (last)": false,
+              "files_limit": true,
+              "files_limit (last)": true,
+              "files_quota": true,
+              "files_quota (last)": true,
+              "files_used": true,
+              "files_used (last)": true
+            },
+            "indexByName": {
+              "blocks_limit (last)": 5,
+              "blocks_quota (last)": 4,
+              "blocks_used (last)": 3,
+              "blocks_used_fraction": 2,
+              "mount_path": 1,
+              "user": 0
+            },
+            "renameByName": {
+              "blocks_limit (last)": "Blocks Limit",
+              "blocks_quota (last)": "Blocks Quota",
+              "blocks_used (last)": "Blocks Used",
+              "blocks_used_fraction": "Blocks Used %",
+              "files_used_fraction": "Files Usage %",
+              "mount_path": "Mount Path",
+              "user": "User"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "Blocks Used %"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 19
       },
       "id": 2,
       "title": "Graphs",
@@ -270,7 +814,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 20
       },
       "id": 1,
       "options": {
@@ -377,7 +921,7 @@
         "h": 19,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 39
       },
       "id": 5,
       "options": {
@@ -418,7 +962,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 38,
   "tags": [
     "Long Term Metrics (2 Year Retention)"
   ],
@@ -429,11 +973,10 @@
     "from": "now-30d",
     "to": "now"
   },
-  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }
