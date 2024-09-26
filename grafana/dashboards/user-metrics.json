@@ -1,1891 +1,1891 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
           "type": "dashboard"
-        },
-        "type": "dashboard"
-      }
-    ]
-  },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 2,
-  "links": [],
-  "liveNow": false,
-  "panels": [
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P27AA5C6EF93B953C"
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 22,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "This dashboard is designed to offer insights into per user filesystem quotas, and Slurm job metrics",
-        "mode": "markdown"
-      },
-      "pluginVersion": "10.2.2",
-      "title": "Description",
-      "type": "text"
+        }
+      ]
     },
-    {
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 7
-      },
-      "id": 16,
-      "title": "Overview",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Total jobs terminated in the selected period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 2,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P27AA5C6EF93B953C"
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 22,
+        "options": {
+          "code": {
+            "language": "plaintext",
+            "showLineNumbers": false,
+            "showMiniMap": false
           },
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+          "content": "This dashboard is designed to offer insights into per user filesystem quotas, and Slurm job metrics",
+          "mode": "markdown"
+        },
+        "pluginVersion": "11.0.0",
+        "title": "Description",
+        "type": "text"
+      },
+      {
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 16,
+        "title": "Overview",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "Total jobs terminated in the selected period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "FAILED"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "TIMEOUT"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "orange",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "COMPLETED"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "NODE_FAIL"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "red",
+                    "mode": "fixed"
+                  }
+                }
+              ]
             }
-          },
-          "mappings": []
+          ]
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "FAILED"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 8
+        },
+        "id": 24,
+        "options": {
+          "displayLabels": [
+            "percent"
+          ],
+          "legend": {
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true,
+            "sortBy": "Value",
+            "sortDesc": true,
+            "values": [
+              "value"
             ]
           },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "TIMEOUT"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": true
           },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "COMPLETED"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "NODE_FAIL"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
+          "tooltip": {
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
           }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 8
-      },
-      "id": 24,
-      "options": {
-        "displayLabels": [
-          "percent"
+        },
+        "pluginVersion": "9.1.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A",
+            "withTransforms": false
+          }
         ],
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "sortBy": "Value",
-          "sortDesc": true,
-          "values": [
-            "value"
-          ]
-        },
-        "pieType": "pie",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": true
-        },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.1.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A",
-          "withTransforms": false
-        }
-      ],
-      "title": "Total Jobs",
-      "transformations": [
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "jobid": {
-                "aggregations": [
-                  "distinctCount"
-                ],
-                "operation": "aggregate"
-              },
-              "state": {
-                "aggregations": [
-                  "sum"
-                ],
-                "operation": "groupby"
-              }
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "account": true,
-              "cpu_eff": true,
-              "cpus": true,
-              "gpus": true,
-              "instance": true,
-              "job": true,
-              "jobid": true,
-              "mem_util": true,
-              "memory": true,
-              "nodes": true,
-              "partition": true,
-              "runtime": true,
-              "state": false,
-              "user": true
-            },
-            "indexByName": {},
-            "renameByName": {
-              "jobid (distinctCount)": "",
-              "state": ""
-            }
-          }
-        }
-      ],
-      "type": "piechart"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Average CPU utilisation across all jobs terminated in the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 8,
-        "y": 8
-      },
-      "id": 23,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A"
-        }
-      ],
-      "title": "Average CPU Utilisation",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "cpu_eff numeric",
-            "binary": {
-              "left": "cpu_eff",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "lower",
-                  "options": {
-                    "value": "Infinity"
-                  }
+        "title": "Total Jobs",
+        "transformations": [
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "jobid": {
+                  "aggregations": [
+                    "distinctCount"
+                  ],
+                  "operation": "aggregate"
                 },
-                "fieldName": "cpu_eff numeric"
+                "state": {
+                  "aggregations": [
+                    "sum"
+                  ],
+                  "operation": "groupby"
+                }
               }
-            ],
-            "match": "all",
-            "type": "include"
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Number of jobs by CPUs allocated.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "blue",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "left",
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
             }
           },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "blue",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 10,
-        "x": 14,
-        "y": 8
-      },
-      "id": 28,
-      "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "orientation": "auto",
-        "showValue": "always",
-        "stacking": "none",
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        },
-        "xField": "Allocated CPUs",
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
-      },
-      "pluginVersion": "",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A",
-          "withTransforms": true
-        }
-      ],
-      "title": "Job Allocations by CPUs",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "byVariable": false,
-            "include": {
-              "names": [
-                "Allocated CPUs"
-              ]
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "number",
-                "targetField": "Allocated CPUs numeric"
-              }
-            ],
-            "fields": {}
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "reducer": "count"
-            }
-          }
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Allocated CPUs": {
-                "aggregations": [],
-                "operation": "groupby"
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true,
+                "account": true,
+                "cpu_eff": true,
+                "cpus": true,
+                "gpus": true,
+                "instance": true,
+                "job": true,
+                "jobid": true,
+                "mem_util": true,
+                "memory": true,
+                "nodes": true,
+                "partition": true,
+                "runtime": true,
+                "state": false,
+                "user": true
               },
-              "Count": {
-                "aggregations": [
-                  "sum"
-                ],
-                "operation": "aggregate"
+              "indexByName": {},
+              "renameByName": {
+                "jobid (distinctCount)": "",
+                "state": ""
               }
             }
           }
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "field": "Allocated CPUs"
-              }
-            ]
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Count (sum)": "Job Allocations"
-            }
-          }
-        }
-      ],
-      "type": "barchart"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
+        ],
+        "type": "piechart"
       },
-      "description": "Average maximum memory utilisation across all jobs terminated in the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 8,
-        "y": 12
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A"
-        }
-      ],
-      "title": "Average Memory Utilisation",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "mem_util numeric",
-            "binary": {
-              "left": "mem_util",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
+        "description": "Average CPU utilisation across all jobs terminated in the selected time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
             },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "lower",
-                  "options": {
-                    "value": "Infinity"
-                  }
+            "decimals": 2,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
                 },
-                "fieldName": "mem_util numeric"
-              }
-            ],
-            "match": "all",
-            "type": "include"
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P27AA5C6EF93B953C"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "left",
-            "cellOptions": {
-              "type": "color-text"
-            },
-            "inspect": false
-          },
-          "fieldMinMax": false,
-          "mappings": [
-            {
-              "options": {
-                "Infinity": {
-                  "index": 0,
-                  "text": "N.A"
-                }
-              },
-              "type": "value"
-            },
-            {
-              "options": {
-                "match": "nan",
-                "result": {
-                  "index": 1,
-                  "text": "N.A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "files_grace"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              },
-              {
-                "id": "mappings",
-                "value": []
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "blocks_grace"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "files_used_fraction"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 0.5
-                    },
-                    {
-                      "color": "dark-orange",
-                      "value": 0.75
-                    },
-                    {
-                      "color": "red",
-                      "value": 0.9
-                    },
-                    {
-                      "color": "text",
-                      "value": 1e+26
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "max",
-                "value": 1
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "gauge",
-                  "valueDisplayMode": "color"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "blocks_used_fraction"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 0.5
-                    },
-                    {
-                      "color": "dark-orange",
-                      "value": 0.75
-                    },
-                    {
-                      "color": "red",
-                      "value": 0.9
-                    },
-                    {
-                      "color": "text",
-                      "value": 1e+26
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "max",
-                "value": 1
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "gauge",
-                  "valueDisplayMode": "color"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 16
-      },
-      "id": 33,
-      "options": {
-        "cellHeight": "md",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": [],
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "frameIndex": 7,
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P27AA5C6EF93B953C"
-          },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "last_over_time({__name__=~\"node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_quota|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_grace|node_user_storage_quota_files_used|node_user_storage_quota_files_quota|node_user_storage_quota_files_limit|node_user_storage_quota_files_grace\", user=\"$user\", node_type=\"core\"}[$__interval])",
-          "format": "time_series",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": true,
-          "interval": "5m",
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Filesystem Storage Quotas",
-      "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "mount_path"
-            ],
-            "mode": "columns"
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "renameByRegex",
-          "options": {
-            "regex": "node_user_storage_quota_(.*)",
-            "renamePattern": "$1"
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "blocks_used_fraction",
-            "binary": {
-              "left": "blocks_used",
-              "operator": "/",
-              "right": "blocks_quota"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "files_used_fraction",
-            "binary": {
-              "left": "files_used",
-              "operator": "/",
-              "right": "files_quota"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true
-            },
-            "indexByName": {
-              "Time": 3,
-              "blocks_grace": 11,
-              "blocks_limit": 10,
-              "blocks_quota": 9,
-              "blocks_used": 8,
-              "blocks_used_fraction": 2,
-              "files_grace": 7,
-              "files_limit": 6,
-              "files_quota": 5,
-              "files_used": 4,
-              "files_used_fraction": 1,
-              "mount_path": 0
-            },
-            "renameByName": {
-              "blocks_grace": "Block Grace Period (s)",
-              "blocks_limit": "Blocks Limit",
-              "blocks_quota": "Blocks Quota",
-              "blocks_used": "Blocks Used",
-              "blocks_used_fraction": "Blocks Used %",
-              "files_grace": "Files Grace Period (s)",
-              "files_limit": "Files Limit",
-              "files_quota": "Files Quota",
-              "files_used": "FIles Used",
-              "files_used_fraction": "Files Used %",
-              "mount_path": "FS Mount Path"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Average wait time across all jobs terminated in the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "wait_time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dthms"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 8,
-        "y": 16
-      },
-      "id": 27,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/.*/",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A",
-          "withTransforms": true
-        }
-      ],
-      "title": "Average Job Wait Time",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "byVariable": false,
-            "include": {
-              "names": [
-                "wait_time"
-              ]
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "number",
-                "targetField": "wait_time"
-              }
-            ],
-            "fields": {}
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Number of jobs by nodes allocated.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "blue",
-            "mode": "fixed"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "fillOpacity": 80,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineWidth": 1,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "blue",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 10,
-        "x": 14,
-        "y": 16
-      },
-      "id": 30,
-      "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        },
-        "xField": "Allocated Nodes",
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
-      },
-      "pluginVersion": "",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A",
-          "withTransforms": true
-        }
-      ],
-      "title": "Job Allocations by Nodes",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "byVariable": false,
-            "include": {
-              "names": [
-                "Allocated Nodes"
-              ]
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "number",
-                "targetField": "Allocated Nodes numeric"
-              }
-            ],
-            "fields": {}
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "reducer": "count"
-            }
-          }
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "Allocated CPUs": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "Allocated Nodes": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "Count": {
-                "aggregations": [
-                  "sum"
-                ],
-                "operation": "aggregate"
-              }
-            }
-          }
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "field": "Allocated Nodes"
-              }
-            ]
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "Count (sum)": "Job Allocations"
-            }
-          }
-        }
-      ],
-      "type": "barchart"
-    },
-    {
-      "datasource": {
-        "type": "datasource",
-        "uid": "-- Dashboard --"
-      },
-      "description": "Average run time across all jobs terminated in the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 5,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 50
-              },
-              {
-                "color": "green",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "dthms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 8,
-        "y": 20
-      },
-      "id": 31,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/.*/",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.2.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "datasource",
-            "uid": "-- Dashboard --"
-          },
-          "panelId": 11,
-          "refId": "A",
-          "withTransforms": true
-        }
-      ],
-      "title": "Average Job Run Time",
-      "transformations": [
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "byVariable": false,
-            "include": {
-              "names": [
-                "runtime_sec"
-              ]
-            }
-          }
-        },
-        {
-          "id": "convertFieldType",
-          "options": {
-            "conversions": [
-              {
-                "destinationType": "number",
-                "targetField": "runtime_sec"
-              }
-            ],
-            "fields": {}
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 24
-      },
-      "id": 18,
-      "panels": [],
-      "title": "Job Details",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P27AA5C6EF93B953C"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "left",
-            "cellOptions": {
-              "type": "color-text"
-            },
-            "inspect": false,
-            "minWidth": 50
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "COMPLETED": {
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                },
+                {
                   "color": "green",
-                  "index": 0
-                },
-                "FAILED": {
-                  "color": "red",
-                  "index": 1
-                },
-                "NODE_FAIL": {
-                  "color": "red",
-                  "index": 3
-                },
-                "TIMEOUT": {
-                  "color": "orange",
-                  "index": 2
+                  "value": 80
                 }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 8,
+          "y": 8
+        },
+        "id": 23,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A"
+          }
+        ],
+        "title": "Average CPU Utilisation",
+        "transformations": [
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "cpu_eff numeric",
+              "binary": {
+                "left": "cpu_eff",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
               },
-              "type": "value"
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              },
+              "replaceFields": true
             }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text"
-              }
-            ]
-          }
-        },
-        "overrides": [
+          },
           {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU Efficiency"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red"
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "lower",
+                    "options": {
+                      "value": "Infinity"
                     }
-                  ]
+                  },
+                  "fieldName": "cpu_eff numeric"
                 }
-              },
-              {
-                "id": "decimals",
-                "value": 2
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Utilisation"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "red"
-                    },
-                    {
-                      "color": "orange",
-                      "value": 50
-                    },
-                    {
-                      "color": "green",
-                      "value": 80
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "decimals",
-                "value": 2
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Energy Usage"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "watth"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Allocated Memory"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "bytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Energy Cost"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "currencyGBP"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Wait Time"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "dthms"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Run Time"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
+              ],
+              "match": "all",
+              "type": "include"
+            }
           }
-        ]
+        ],
+        "type": "stat"
       },
-      "gridPos": {
-        "h": 13,
-        "w": 24,
-        "x": 0,
-        "y": 25
-      },
-      "id": 11,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
         },
-        "showHeader": true,
-        "sortBy": [
+        "description": "Number of jobs by CPUs allocated.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "fixed"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "left",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 10,
+          "x": 14,
+          "y": 8
+        },
+        "id": 28,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "fullHighlight": false,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "always",
+          "stacking": "none",
+          "tooltip": {
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "Allocated CPUs",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "",
+        "targets": [
           {
-            "desc": true,
-            "displayName": "CPU Efficiency"
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A",
+            "withTransforms": true
           }
-        ]
+        ],
+        "title": "Job Allocations by CPUs",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "names": [
+                  "Allocated CPUs"
+                ]
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "Allocated CPUs numeric"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "reducer": "count"
+              }
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Allocated CPUs": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "Count": {
+                  "aggregations": [
+                    "sum"
+                  ],
+                  "operation": "aggregate"
+                }
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "field": "Allocated CPUs"
+                }
+              ]
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Count (sum)": "Job Allocations"
+              }
+            }
+          }
+        ],
+        "type": "barchart"
       },
-      "pluginVersion": "10.2.2",
-      "targets": [
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "Average maximum memory utilisation across all jobs terminated in the selected time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                },
+                {
+                  "color": "green",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 8,
+          "y": 12
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A"
+          }
+        ],
+        "title": "Average Memory Utilisation",
+        "transformations": [
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "mem_util numeric",
+              "binary": {
+                "left": "mem_util",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              },
+              "replaceFields": true
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "lower",
+                    "options": {
+                      "value": "Infinity"
+                    }
+                  },
+                  "fieldName": "mem_util numeric"
+                }
+              ],
+              "match": "all",
+              "type": "include"
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P27AA5C6EF93B953C"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "left",
+              "cellOptions": {
+                "type": "color-text"
+              },
+              "inspect": false
+            },
+            "fieldMinMax": false,
+            "mappings": [
+              {
+                "options": {
+                  "Infinity": {
+                    "index": 0,
+                    "text": "N.A"
+                  }
+                },
+                "type": "value"
+              },
+              {
+                "options": {
+                  "match": "nan",
+                  "result": {
+                    "index": 1,
+                    "text": "N.A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "files_grace"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                },
+                {
+                  "id": "mappings",
+                  "value": []
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "blocks_grace"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "s"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "files_used_fraction"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "percentunit"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 0.5
+                      },
+                      {
+                        "color": "dark-orange",
+                        "value": 0.75
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.9
+                      },
+                      {
+                        "color": "text",
+                        "value": 1e+26
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "max",
+                  "value": 1
+                },
+                {
+                  "id": "min",
+                  "value": 0
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "basic",
+                    "type": "gauge",
+                    "valueDisplayMode": "color"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "blocks_used_fraction"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "percentunit"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": null
+                      },
+                      {
+                        "color": "#EAB839",
+                        "value": 0.5
+                      },
+                      {
+                        "color": "dark-orange",
+                        "value": 0.75
+                      },
+                      {
+                        "color": "red",
+                        "value": 0.9
+                      },
+                      {
+                        "color": "text",
+                        "value": 1e+26
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "min",
+                  "value": 0
+                },
+                {
+                  "id": "max",
+                  "value": 1
+                },
+                {
+                  "id": "custom.cellOptions",
+                  "value": {
+                    "mode": "basic",
+                    "type": "gauge",
+                    "valueDisplayMode": "color"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 8,
+          "x": 0,
+          "y": 16
+        },
+        "id": 33,
+        "options": {
+          "cellHeight": "md",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": [],
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "frameIndex": 7,
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P27AA5C6EF93B953C"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "exemplar": false,
+            "expr": "last_over_time({__name__=~\"node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_quota|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_grace|node_user_storage_quota_files_used|node_user_storage_quota_files_quota|node_user_storage_quota_files_limit|node_user_storage_quota_files_grace\", user=\"$user\", node_type=\"core\"}[$__interval])",
+            "format": "time_series",
+            "fullMetaSearch": false,
+            "includeNullMetadata": true,
+            "instant": true,
+            "interval": "5m",
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A",
+            "useBackend": false
+          }
+        ],
+        "title": "Filesystem Storage Quotas",
+        "transformations": [
+          {
+            "id": "labelsToFields",
+            "options": {
+              "keepLabels": [
+                "mount_path"
+              ],
+              "mode": "columns"
+            }
+          },
+          {
+            "id": "merge",
+            "options": {}
+          },
+          {
+            "id": "renameByRegex",
+            "options": {
+              "regex": "node_user_storage_quota_(.*)",
+              "renamePattern": "$1"
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "blocks_used_fraction",
+              "binary": {
+                "left": "blocks_used",
+                "operator": "/",
+                "right": "blocks_quota"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "files_used_fraction",
+              "binary": {
+                "left": "files_used",
+                "operator": "/",
+                "right": "files_quota"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true
+              },
+              "indexByName": {
+                "Time": 3,
+                "blocks_grace": 11,
+                "blocks_limit": 10,
+                "blocks_quota": 9,
+                "blocks_used": 8,
+                "blocks_used_fraction": 2,
+                "files_grace": 7,
+                "files_limit": 6,
+                "files_quota": 5,
+                "files_used": 4,
+                "files_used_fraction": 1,
+                "mount_path": 0
+              },
+              "renameByName": {
+                "blocks_grace": "Block Grace Period (s)",
+                "blocks_limit": "Blocks Limit",
+                "blocks_quota": "Blocks Quota",
+                "blocks_used": "Blocks Used",
+                "blocks_used_fraction": "Blocks Used %",
+                "files_grace": "Files Grace Period (s)",
+                "files_limit": "Files Limit",
+                "files_quota": "Files Quota",
+                "files_used": "FIles Used",
+                "files_used_fraction": "Files Used %",
+                "mount_path": "FS Mount Path"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "Average wait time across all jobs terminated in the selected time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                },
+                {
+                  "color": "green",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "wait_time"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "dthms"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 8,
+          "y": 16
+        },
+        "id": 27,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A",
+            "withTransforms": true
+          }
+        ],
+        "title": "Average Job Wait Time",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "names": [
+                  "wait_time"
+                ]
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "wait_time"
+                }
+              ],
+              "fields": {}
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "Number of jobs by nodes allocated.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "fixedColor": "blue",
+              "mode": "fixed"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 0,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 10,
+          "x": 14,
+          "y": 16
+        },
+        "id": 30,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "fullHighlight": false,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "Allocated Nodes",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A",
+            "withTransforms": true
+          }
+        ],
+        "title": "Job Allocations by Nodes",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "names": [
+                  "Allocated Nodes"
+                ]
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "Allocated Nodes numeric"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "mode": "reduceRow",
+              "reduce": {
+                "reducer": "count"
+              }
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Allocated CPUs": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "Allocated Nodes": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "Count": {
+                  "aggregations": [
+                    "sum"
+                  ],
+                  "operation": "aggregate"
+                }
+              }
+            }
+          },
+          {
+            "id": "sortBy",
+            "options": {
+              "fields": {},
+              "sort": [
+                {
+                  "field": "Allocated Nodes"
+                }
+              ]
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {},
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Count (sum)": "Job Allocations"
+              }
+            }
+          }
+        ],
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Dashboard --"
+        },
+        "description": "Average run time across all jobs terminated in the selected time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 5,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                },
+                {
+                  "color": "green",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 6,
+          "x": 8,
+          "y": 20
+        },
+        "id": 31,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "-- Dashboard --"
+            },
+            "panelId": 11,
+            "refId": "A",
+            "withTransforms": true
+          }
+        ],
+        "title": "Average Job Run Time",
+        "transformations": [
+          {
+            "id": "filterFieldsByName",
+            "options": {
+              "byVariable": false,
+              "include": {
+                "names": [
+                  "runtime_sec"
+                ]
+              }
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "number",
+                  "targetField": "runtime_sec"
+                }
+              ],
+              "fields": {}
+            }
+          }
+        ],
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 18,
+        "panels": [],
+        "title": "Job Details",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P27AA5C6EF93B953C"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "left",
+              "cellOptions": {
+                "type": "color-text"
+              },
+              "inspect": false,
+              "minWidth": 50
+            },
+            "decimals": 2,
+            "mappings": [
+              {
+                "options": {
+                  "COMPLETED": {
+                    "color": "green",
+                    "index": 0
+                  },
+                  "FAILED": {
+                    "color": "red",
+                    "index": 1
+                  },
+                  "NODE_FAIL": {
+                    "color": "red",
+                    "index": 3
+                  },
+                  "TIMEOUT": {
+                    "color": "orange",
+                    "index": 2
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "CPU Efficiency"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "percent"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "red",
+                        "value": null
+                      },
+                      {
+                        "color": "orange",
+                        "value": 50
+                      },
+                      {
+                        "color": "green",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Memory Utilisation"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "percent"
+                },
+                {
+                  "id": "thresholds",
+                  "value": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "red",
+                        "value": null
+                      },
+                      {
+                        "color": "orange",
+                        "value": 50
+                      },
+                      {
+                        "color": "green",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "decimals",
+                  "value": 2
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Energy Usage"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "watth"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Allocated Memory"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "bytes"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Energy Cost"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "currencyGBP"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Wait Time"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "dthms"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Run Time"
+              },
+              "properties": [
+                {
+                  "id": "custom.hidden",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 25
+        },
+        "id": 11,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "CPU Efficiency"
+            }
+          ]
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "P27AA5C6EF93B953C"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\", user=~\"$user\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
+            "format": "table",
+            "instant": true,
+            "legendFormat": "__auto",
+            "range": false,
+            "refId": "A"
+          }
+        ],
+        "title": "Job Efficiency",
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true,
+                "__name__": true,
+                "account": true,
+                "energy": true,
+                "gpus": false,
+                "instance": true,
+                "job": true,
+                "nodes": false,
+                "runtime": false,
+                "runtime_sec": false,
+                "user": true
+              },
+              "indexByName": {
+                "Time": 0,
+                "Value": 6,
+                "__name__": 1,
+                "account": 2,
+                "cpu_eff": 15,
+                "cpus": 12,
+                "gpus": 14,
+                "instance": 3,
+                "job": 4,
+                "jobid": 7,
+                "mem_util": 16,
+                "memory": 13,
+                "nodes": 11,
+                "partition": 8,
+                "runtime": 9,
+                "state": 10,
+                "user": 5
+              },
+              "renameByName": {
+                "account": "Account",
+                "cpu_eff": "CPU Efficiency",
+                "cpus": "Allocated CPUs",
+                "energy": "Energy Usage",
+                "gpus": "Allocated GPUs",
+                "jobid": "Job ID",
+                "mem_util": "Memory Utilisation",
+                "memory": "Allocated Memory",
+                "nodes": "Allocated Nodes",
+                "partition": "Partition",
+                "runtime": "Walltime",
+                "runtime_sec": "Run Time",
+                "state": "State",
+                "wait_time": "Wait Time"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Energy Usage": true,
+                "Energy Usage (PUE)": false,
+                "Energy Usage (kWh)": true
+              },
+              "indexByName": {},
+              "renameByName": {
+                "Energy Usage (PUE)": "Energy Usage"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "CPU Efficiency numeric",
+              "binary": {
+                "left": "CPU Efficiency",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "Memory Utilisation numeric",
+              "binary": {
+                "left": "Memory Utilisation",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "Allocated Nodes numeric",
+              "binary": {
+                "left": "Allocated Nodes",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "Allocated CPUs numeric",
+              "binary": {
+                "left": "Allocated CPUs",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "Allocated Memory numeric",
+              "binary": {
+                "left": "Allocated Memory",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "1"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Allocated CPUs": true,
+                "Allocated Memory": true,
+                "Allocated Nodes": true,
+                "CPU Efficiency": true,
+                "Memory Utilisation": true,
+                "Run Time": false
+              },
+              "includeByName": {},
+              "indexByName": {
+                "Allocated CPUs": 5,
+                "Allocated CPUs numeric": 6,
+                "Allocated GPUs": 9,
+                "Allocated Memory": 7,
+                "Allocated Memory numeric": 8,
+                "Allocated Nodes": 3,
+                "Allocated Nodes numeric": 4,
+                "CPU Efficiency": 10,
+                "CPU Efficiency numeric": 11,
+                "Job ID": 0,
+                "Memory Utilisation": 12,
+                "Memory Utilisation numeric": 13,
+                "Partition": 1,
+                "State": 2,
+                "Walltime": 14
+              },
+              "renameByName": {
+                "Allocated CPUs numeric": "Allocated CPUs",
+                "Allocated Memory numeric": "Allocated Memory",
+                "Allocated Nodes numeric": "Allocated Nodes",
+                "CPU Efficiency numeric": "CPU Efficiency",
+                "Memory Utilisation numeric": "Memory Utilisation",
+                "Walltime": "Wall Time"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 39,
+    "tags": [
+      "Short Term Metrics (30d retention)"
+    ],
+    "templating": {
+      "list": [
         {
+          "current": {
+            "selected": true,
+            "text": "flight",
+            "value": "flight"
+          },
           "datasource": {
             "type": "prometheus",
             "uid": "P27AA5C6EF93B953C"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\", user=~\"$user\", state!~\"FAILED\", cpu_eff!=\"Infinity\", mem_util!=\"Infinity\"}[$__range])",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "A"
+          "definition": "label_values({__name__=~\"node_user_storage_quota_files_used|node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_grace|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_quota|node_user_storage_quota_files_grace|node_user_storage_quota_files_limit|node_user_storage_quota_files_quota\"},user)",
+          "description": "Cluster user.",
+          "hide": 0,
+          "includeAll": false,
+          "label": "User",
+          "multi": false,
+          "name": "user",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values({__name__=~\"node_user_storage_quota_files_used|node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_grace|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_quota|node_user_storage_quota_files_grace|node_user_storage_quota_files_limit|node_user_storage_quota_files_quota\"},user)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "definition": "label_values(slurm_job_meta{user=\"$user\"},account)",
+          "description": "Slurm account.",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Account",
+          "multi": true,
+          "name": "account",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(slurm_job_meta{user=\"$user\"},account)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "definition": "label_values(slurm_job_meta{account=\"$account\"},partition)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Partition",
+          "multi": true,
+          "name": "partition",
+          "options": [],
+          "query": {
+            "qryType": 1,
+            "query": "label_values(slurm_job_meta{account=\"$account\"},partition)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 2,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
         }
-      ],
-      "title": "Job Efficiency",
-      "transformations": [
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Value": true,
-              "__name__": true,
-              "account": true,
-              "energy": true,
-              "gpus": false,
-              "instance": true,
-              "job": true,
-              "nodes": false,
-              "runtime": false,
-              "runtime_sec": false,
-              "user": true
-            },
-            "indexByName": {
-              "Time": 0,
-              "Value": 6,
-              "__name__": 1,
-              "account": 2,
-              "cpu_eff": 15,
-              "cpus": 12,
-              "gpus": 14,
-              "instance": 3,
-              "job": 4,
-              "jobid": 7,
-              "mem_util": 16,
-              "memory": 13,
-              "nodes": 11,
-              "partition": 8,
-              "runtime": 9,
-              "state": 10,
-              "user": 5
-            },
-            "renameByName": {
-              "account": "Account",
-              "cpu_eff": "CPU Efficiency",
-              "cpus": "Allocated CPUs",
-              "energy": "Energy Usage",
-              "gpus": "Allocated GPUs",
-              "jobid": "Job ID",
-              "mem_util": "Memory Utilisation",
-              "memory": "Allocated Memory",
-              "nodes": "Allocated Nodes",
-              "partition": "Partition",
-              "runtime": "Walltime",
-              "runtime_sec": "Run Time",
-              "state": "State",
-              "wait_time": "Wait Time"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Energy Usage": true,
-              "Energy Usage (PUE)": false,
-              "Energy Usage (kWh)": true
-            },
-            "indexByName": {},
-            "renameByName": {
-              "Energy Usage (PUE)": "Energy Usage"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "CPU Efficiency numeric",
-            "binary": {
-              "left": "CPU Efficiency",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Memory Utilisation numeric",
-            "binary": {
-              "left": "Memory Utilisation",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Allocated Nodes numeric",
-            "binary": {
-              "left": "Allocated Nodes",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Allocated CPUs numeric",
-            "binary": {
-              "left": "Allocated CPUs",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Allocated Memory numeric",
-            "binary": {
-              "left": "Allocated Memory",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "1"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Allocated CPUs": true,
-              "Allocated Memory": true,
-              "Allocated Nodes": true,
-              "CPU Efficiency": true,
-              "Memory Utilisation": true,
-              "Run Time": false
-            },
-            "includeByName": {},
-            "indexByName": {
-              "Allocated CPUs": 5,
-              "Allocated CPUs numeric": 6,
-              "Allocated GPUs": 9,
-              "Allocated Memory": 7,
-              "Allocated Memory numeric": 8,
-              "Allocated Nodes": 3,
-              "Allocated Nodes numeric": 4,
-              "CPU Efficiency": 10,
-              "CPU Efficiency numeric": 11,
-              "Job ID": 0,
-              "Memory Utilisation": 12,
-              "Memory Utilisation numeric": 13,
-              "Partition": 1,
-              "State": 2,
-              "Walltime": 14
-            },
-            "renameByName": {
-              "Allocated CPUs numeric": "Allocated CPUs",
-              "Allocated Memory numeric": "Allocated Memory",
-              "Allocated Nodes numeric": "Allocated Nodes",
-              "CPU Efficiency numeric": "CPU Efficiency",
-              "Memory Utilisation numeric": "Memory Utilisation",
-              "Walltime": "Wall Time"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    }
-  ],
-  "refresh": "",
-  "schemaVersion": 38,
-  "tags": [
-    "Short Term Metrics (30d retention)"
-  ],
-  "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "P27AA5C6EF93B953C"
-        },
-        "definition": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
-        "description": "Slurm account.",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Account",
-        "multi": true,
-        "name": "account",
-        "options": [],
-        "query": {
-          "qryType": 3,
-          "query": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "regex": ".*account=\"(.*?)\".*",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "P27AA5C6EF93B953C"
-        },
-        "definition": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Partition",
-        "multi": true,
-        "name": "partition",
-        "options": [],
-        "query": {
-          "qryType": 3,
-          "query": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "regex": ".*partition=\"(.*?)\".*",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": [
-            "root"
-          ],
-          "value": [
-            "root"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "P27AA5C6EF93B953C"
-        },
-        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
-        "description": "Cluster user.",
-        "hide": 0,
-        "includeAll": true,
-        "label": "User",
-        "multi": true,
-        "name": "user",
-        "options": [],
-        "query": {
-          "qryType": 3,
-          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "regex": ".*user=\"(.*?)\".*",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "User Metrics",
-  "uid": "dc007c82-e816-4111-a32b-606567330498",
-  "version": 4,
-  "weekStart": ""
-}
+      ]
+    },
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timeRangeUpdatedDuringEditOrView": false,
+    "timepicker": {},
+    "timezone": "",
+    "title": "User Metrics",
+    "uid": "dc007c82-e816-4111-a32b-606567330498",
+    "version": 2,
+    "weekStart": ""
+  }
