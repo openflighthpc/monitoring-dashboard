@@ -51,18 +51,51 @@
                 "value": null
               },
               {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
                 "color": "orange",
-                "value": 80
+                "value": 0.8
               },
               {
                 "color": "red",
-                "value": 90
+                "value": 0.9
               }
             ]
           },
           "unit": "percentunit"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Files"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 11,
@@ -84,7 +117,7 @@
         "frameIndex": 1,
         "showHeader": true
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -187,11 +220,12 @@
         "content": "This dashboard provides an overview of your cluster filesystem usage over the selected time period.",
         "mode": "markdown"
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "title": "Description",
       "type": "text"
     },
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -199,6 +233,7 @@
         "y": 11
       },
       "id": 2,
+      "panels": [],
       "title": "Graphs",
       "type": "row"
     },
@@ -417,10 +452,24 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 50
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Quotas",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Top 10 Usage by quota for $mount_path.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -433,6 +482,7 @@
             },
             "inspect": false
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -448,13 +498,26 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Blocks"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kbytes"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 16,
         "w": 12,
         "x": 0,
-        "y": 50
+        "y": 51
       },
       "id": 6,
       "options": {
@@ -471,7 +534,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "repeat": "mount_path",
       "repeatDirection": "v",
       "targets": [
@@ -481,94 +544,34 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time({__name__=~\"files_used|files_limit|files_quota\", mount_path=\"$mount_path\"}[$__range])",
+          "expr": "topk(10, last_over_time(blocks_used{mount_path=\"$mount_path\"}[$__range]))",
+          "format": "table",
           "fullMetaSearch": false,
+          "hide": false,
           "includeNullMetadata": true,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
-          "refId": "A",
+          "refId": "B",
           "useBackend": false
         }
       ],
-      "title": "Top Quota Usage (Files) : $mount_path",
+      "title": "Top 10 Users (Blocks) : $mount_path",
       "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "user"
-            ]
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "files_limit": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "files_quota": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "files_used": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "mount_path": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "user": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        },
         {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Time": true,
-              "blocks_limit": true,
-              "blocks_quota": true,
-              "blocks_used": true,
-              "files_limit": true,
-              "files_limit (last)": false,
-              "files_quota": true,
-              "files_quota (last)": false,
-              "files_used": true,
-              "files_used (last)": false
+              "__name__": true,
+              "mount_path": true
             },
-            "indexByName": {
-              "files_limit (last)": 5,
-              "files_quota (last)": 4,
-              "files_used (last)": 3,
-              "files_used_fraction": 2,
-              "mount_path": 1,
-              "user": 0
-            },
+            "includeByName": {},
+            "indexByName": {},
             "renameByName": {
-              "files_limit (last)": "Files Limit",
-              "files_quota (last)": "Files Quota",
-              "files_used (last)": "Files Used",
-              "files_used_fraction": "Files Usage %",
-              "mount_path": "Mount Path",
+              "Value": "Blocks",
               "user": "User"
             }
           }
@@ -580,33 +583,9 @@
             "sort": [
               {
                 "desc": true,
-                "field": "Files Used"
+                "field": "Blocks"
               }
             ]
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "greater",
-                  "options": {
-                    "value": 0
-                  }
-                },
-                "fieldName": "Files Quota"
-              }
-            ],
-            "match": "all",
-            "type": "include"
-          }
-        },
-        {
-          "id": "limit",
-          "options": {
-            "limitField": 20
           }
         }
       ],
@@ -617,6 +596,7 @@
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
       },
+      "description": "Top 10 Usage by quota for $mount_path.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -629,6 +609,7 @@
             },
             "inspect": false
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -644,15 +625,28 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Files"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 16,
         "w": 12,
         "x": 12,
-        "y": 50
+        "y": 51
       },
-      "id": 7,
+      "id": 10,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -667,7 +661,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "10.2.2",
+      "pluginVersion": "11.0.0",
       "repeat": "mount_path",
       "repeatDirection": "v",
       "targets": [
@@ -677,117 +671,34 @@
             "uid": "P3D096F30CDAF9ECC"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "last_over_time({__name__=~\"blocks_used|blocks_quota|blocks_limit\", mount_path=\"$mount_path\"}[$__range])",
+          "expr": "topk(10, last_over_time(files_used{mount_path=\"$mount_path\"}[$__range]))",
+          "format": "table",
           "fullMetaSearch": false,
+          "hide": false,
           "includeNullMetadata": true,
           "instant": true,
           "legendFormat": "__auto",
           "range": false,
-          "refId": "A",
+          "refId": "B",
           "useBackend": false
         }
       ],
-      "title": "Top Quota Usage (Blocks) : $mount_path",
+      "title": "Top 10 Users (Files) : $mount_path",
       "transformations": [
-        {
-          "id": "labelsToFields",
-          "options": {
-            "keepLabels": [
-              "user"
-            ]
-          }
-        },
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "groupBy",
-          "options": {
-            "fields": {
-              "blocks_limit": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "blocks_quota": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "blocks_used": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "files_limit": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "files_quota": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "files_used": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "mount_path": {
-                "aggregations": [],
-                "operation": "groupby"
-              },
-              "user": {
-                "aggregations": [],
-                "operation": "groupby"
-              }
-            }
-          }
-        },
         {
           "id": "organize",
           "options": {
             "excludeByName": {
               "Time": true,
-              "blocks_limit": true,
-              "blocks_limit (last)": false,
-              "blocks_quota": true,
-              "blocks_quota (last)": false,
-              "blocks_quota_adjusted": false,
-              "blocks_used": true,
-              "blocks_used (last)": false,
-              "files_limit": true,
-              "files_limit (last)": true,
-              "files_quota": true,
-              "files_quota (last)": true,
-              "files_used": true,
-              "files_used (last)": true
+              "__name__": true,
+              "mount_path": true
             },
-            "indexByName": {
-              "blocks_limit (last)": 5,
-              "blocks_quota (last)": 4,
-              "blocks_used (last)": 3,
-              "blocks_used_fraction": 2,
-              "mount_path": 1,
-              "user": 0
-            },
+            "includeByName": {},
+            "indexByName": {},
             "renameByName": {
-              "blocks_limit (last)": "Blocks Limit",
-              "blocks_quota (last)": "Blocks Quota",
-              "blocks_used (last)": "Blocks Used",
-              "blocks_used_fraction": "Blocks Used %",
-              "files_used_fraction": "Files Usage %",
-              "mount_path": "Mount Path",
+              "Value": "Files",
               "user": "User"
             }
           }
@@ -799,33 +710,9 @@
             "sort": [
               {
                 "desc": true,
-                "field": "Blocks Used"
+                "field": "Files"
               }
             ]
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "greater",
-                  "options": {
-                    "value": 0
-                  }
-                },
-                "fieldName": "Blocks Quota"
-              }
-            ],
-            "match": "all",
-            "type": "include"
-          }
-        },
-        {
-          "id": "limit",
-          "options": {
-            "limitField": 20
           }
         }
       ],
@@ -833,7 +720,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "tags": [
     "Long Term Metrics (2 Year Retention)"
   ],
@@ -878,10 +765,11 @@
     "from": "now-30d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 2,
+  "version": 9,
   "weekStart": ""
 }
