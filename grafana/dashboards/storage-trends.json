@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 94519,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -193,6 +193,231 @@
       "type": "text"
     },
     {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 2,
+      "title": "Graphs",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P3D096F30CDAF9ECC"
+      },
+      "description": "Storage usage of the cluster filesystems over the selected time period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "editorMode": "code",
+          "expr": "1.0 - (filesystem_free_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_size_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
+          "instant": false,
+          "interval": "1h",
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Filesystem Storage Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P3D096F30CDAF9ECC"
+      },
+      "description": "File count usage of the cluster filesystems over the selected time period.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P3D096F30CDAF9ECC"
+          },
+          "editorMode": "code",
+          "expr": "1.0 - (filesystem_files_free{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_files{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
+          "instant": false,
+          "interval": "1h",
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Filesystem File Usage",
+      "type": "timeseries"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "P3D096F30CDAF9ECC"
@@ -303,7 +528,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 50
       },
       "id": 6,
       "options": {
@@ -321,6 +546,8 @@
         "sortBy": []
       },
       "pluginVersion": "10.2.2",
+      "repeat": "mount_path",
+      "repeatDirection": "v",
       "targets": [
         {
           "datasource": {
@@ -330,7 +557,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "last_over_time({__name__=~\"files_used|files_limit|files_quota\"}[$__interval])",
+          "expr": "last_over_time({__name__=~\"files_used|files_limit|files_quota\", mount_path=\"$mount_path\"}[$__range])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -340,13 +567,12 @@
           "useBackend": false
         }
       ],
-      "title": "Highest File Usage",
+      "title": "Top Quota Usage (Files) : $mount_path",
       "transformations": [
         {
           "id": "labelsToFields",
           "options": {
             "keepLabels": [
-              "mount_path",
               "user"
             ]
           }
@@ -385,21 +611,6 @@
                 "aggregations": [],
                 "operation": "groupby"
               }
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "files_used_fraction",
-            "binary": {
-              "left": "files_used (last)",
-              "operator": "/",
-              "right": "files_quota (last)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
             }
           }
         },
@@ -443,9 +654,33 @@
             "sort": [
               {
                 "desc": true,
-                "field": "Files Usage %"
+                "field": "Files Used"
               }
             ]
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Files Quota"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "limit",
+          "options": {
+            "limitField": 20
           }
         }
       ],
@@ -564,7 +799,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 50
       },
       "id": 7,
       "options": {
@@ -582,6 +817,8 @@
         "sortBy": []
       },
       "pluginVersion": "10.2.2",
+      "repeat": "mount_path",
+      "repeatDirection": "v",
       "targets": [
         {
           "datasource": {
@@ -591,7 +828,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "last_over_time({__name__=~\"blocks_used|blocks_quota|blocks_limit\"}[$__interval])",
+          "expr": "last_over_time({__name__=~\"blocks_used|blocks_quota|blocks_limit\", mount_path=\"$mount_path\"}[$__range])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": true,
@@ -601,13 +838,12 @@
           "useBackend": false
         }
       ],
-      "title": "Highest Block Usage",
+      "title": "Top Quota Usage (Blocks) : $mount_path",
       "transformations": [
         {
           "id": "labelsToFields",
           "options": {
             "keepLabels": [
-              "mount_path",
               "user"
             ]
           }
@@ -668,21 +904,6 @@
           }
         },
         {
-          "id": "calculateField",
-          "options": {
-            "alias": "blocks_used_fraction",
-            "binary": {
-              "left": "blocks_used (last)",
-              "operator": "/",
-              "right": "blocks_quota (last)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
           "id": "organize",
           "options": {
             "excludeByName": {
@@ -727,238 +948,37 @@
             "sort": [
               {
                 "desc": true,
-                "field": "Blocks Used %"
+                "field": "Blocks Used"
               }
             ]
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "greater",
+                  "options": {
+                    "value": 0
+                  }
+                },
+                "fieldName": "Blocks Quota"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "limit",
+          "options": {
+            "limitField": 20
           }
         }
       ],
       "type": "table"
-    },
-    {
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 19
-      },
-      "id": 2,
-      "title": "Graphs",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P3D096F30CDAF9ECC"
-      },
-      "description": "Storage usage of the cluster filesystems over the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 19,
-        "w": 24,
-        "x": 0,
-        "y": 20
-      },
-      "id": 1,
-      "options": {
-        "legend": {
-          "calcs": [
-            "min",
-            "max",
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "expr": "1.0 - (filesystem_free_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_size_bytes{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
-          "instant": false,
-          "interval": "1h",
-          "legendFormat": "{{mountpoint}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Filesystem Storage Usage",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P3D096F30CDAF9ECC"
-      },
-      "description": "File count usage of the cluster filesystems over the selected time period.",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 19,
-        "w": 24,
-        "x": 0,
-        "y": 39
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [
-            "min",
-            "max",
-            "mean",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "maxHeight": 600,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P3D096F30CDAF9ECC"
-          },
-          "editorMode": "code",
-          "expr": "1.0 - (filesystem_files_free{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"}/filesystem_files{mountpoint!~\"/mnt/autofs.*|/opt/gridware|/opt/service|/opt/site\"})",
-          "instant": false,
-          "interval": "1h",
-          "legendFormat": "{{mountpoint}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Filesystem File Usage",
-      "type": "timeseries"
     }
   ],
   "refresh": "",
@@ -967,7 +987,41 @@
     "Long Term Metrics (2 Year Retention)"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P3D096F30CDAF9ECC"
+        },
+        "definition": "label_values({__name__=~\"blocks_used|files_used\"},mount_path)",
+        "description": "Mount Path for quota-enabled filesystems",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Mount Path",
+        "multi": true,
+        "name": "mount_path",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values({__name__=~\"blocks_used|files_used\"},mount_path)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-30d",
@@ -977,6 +1031,6 @@
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 2,
+  "version": 41,
   "weekStart": ""
 }
