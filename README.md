@@ -65,7 +65,7 @@ Add your list of hosts to `/etc/alces-dashboard/metrics/targets/node-exporter.ym
 ```
 
 ### Node Exporter Textfile Collector Scripts
-The `slurm-gpu-allocation.sh` script needs to be installed on a suitable host - typically this would be the same host you install Slurm Exporter to. Following the upstream documentation to install this.
+The `slurm-gpu-allocation.sh` and `user-storage-quota.sh` scripts need to be installed on a suitable host - typically this would be the same host you install Slurm Exporter to. Follow the upstream documentation to install this.
 
 ### Slurm Exporter
 Install this as per the upstream documentation and then update the target file `/etc/alces-dashboard/metrics/targets/slurm-exporter.yml` to include the relevant host. The default configuration assumes this is installed on the same host.

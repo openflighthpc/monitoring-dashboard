@@ -12,3 +12,15 @@ groups:
         expr: max by(mountpoint) (node_filesystem_files{node_type="compute", fstype=~"lustre|nfs|gfs2|gpfs"})
       - record: filesystem_files_free
         expr: max by(mountpoint) (node_filesystem_files_free{node_type="compute", fstype=~"lustre|nfs|gfs2|gpfs"})
+      - record: files_used
+        expr: max by(mount_path, user) (node_user_storage_quota_files_used{})
+      - record: files_quota
+        expr: max by(mount_path, user) (node_user_storage_quota_files_quota{})
+      - record: files_limit
+        expr: max by(mount_path, user) (node_user_storage_quota_files_limit{})
+      - record: blocks_used
+        expr: max by(mount_path, user) (node_user_storage_quota_blocks_used{})
+      - record: blocks_quota
+        expr: max by(mount_path, user) (node_user_storage_quota_blocks_quota{})
+      - record: blocks_limit
+        expr: max by(mount_path, user) (node_user_storage_quota_blocks_limit{})
