@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 94519,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -449,80 +448,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "files_used_fraction"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 0.75
-                    },
-                    {
-                      "color": "red",
-                      "value": 0.8
-                    },
-                    {
-                      "color": "text",
-                      "value": 1e+28
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "Infinity": {
-                        "index": 0,
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "value"
-                  },
-                  {
-                    "options": {
-                      "match": "nan",
-                      "result": {
-                        "index": 1,
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "special"
-                  }
-                ]
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "gauge",
-                  "valueDisplayMode": "color"
-                }
-              },
-              {
-                "id": "max",
-                "value": 1
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -718,82 +644,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "blocks_used_fraction"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "#EAB839",
-                      "value": 0.75
-                    },
-                    {
-                      "color": "red",
-                      "value": 0.8
-                    },
-                    {
-                      "color": "text",
-                      "value": 1e+28
-                    }
-                  ]
-                }
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "mode": "basic",
-                  "type": "gauge",
-                  "valueDisplayMode": "color"
-                }
-              },
-              {
-                "id": "mappings",
-                "value": [
-                  {
-                    "options": {
-                      "Infinity": {
-                        "color": "text",
-                        "index": 0,
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "value"
-                  },
-                  {
-                    "options": {
-                      "match": "nan",
-                      "result": {
-                        "color": "text",
-                        "index": 1,
-                        "text": "N/A"
-                      }
-                    },
-                    "type": "special"
-                  }
-                ]
-              },
-              {
-                "id": "max",
-                "value": 1
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -1031,6 +882,6 @@
   "timezone": "",
   "title": "Storage Trends",
   "uid": "a76acdd3-d8e5-4400-aae6-0586fb6d431b",
-  "version": 41,
+  "version": 2,
   "weekStart": ""
 }
