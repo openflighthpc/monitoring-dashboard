@@ -45,7 +45,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "This dashboard is designed to offer insights into resource utilisation and job efficiency on a per account, partition or user basis using the filters above. \nThe data is displayed as per the timeframe specified and only includes jobs that have terminated successfully in that timeframe. Please see tooltips on metrics for further details.\n\nEfficiency and utilisation values are estimated based on Slurm data and may not be accurate.\n\nUsers and accounts with large numbers of jobs may not display. To resolve this, use a short time window.",
+        "content": "This dashboard is designed to offer insights into per user filesystem quotas, and Slurm job metrics",
         "mode": "markdown"
       },
       "pluginVersion": "11.0.0",
@@ -147,7 +147,7 @@
         ]
       },
       "gridPos": {
-        "h": 16,
+        "h": 8,
         "w": 8,
         "x": 0,
         "y": 8
@@ -372,6 +372,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "left",
             "fillOpacity": 80,
             "gradientMode": "none",
@@ -636,6 +637,340 @@
         "type": "datasource",
         "uid": "-- Dashboard --"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "Infinity": {
+                  "index": 0,
+                  "text": "N/A"
+                },
+                "NaN": {
+                  "index": 1,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+26
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 16
+      },
+      "id": 36,
+      "options": {
+        "cellHeight": "lg",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "hide": false,
+          "panelId": 33,
+          "refId": "B",
+          "withTransforms": true
+        }
+      ],
+      "title": "Quota Overview (Blocks)",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "joinByField",
+          "options": {
+            "byField": "Mount",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Grace Period": true,
+              "Limit": true,
+              "Quota": true,
+              "Used": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Usage": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "Infinity": {
+                  "index": 0,
+                  "text": "N/A"
+                },
+                "NaN": {
+                  "index": 1,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+26
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 16
+      },
+      "id": 37,
+      "options": {
+        "cellHeight": "lg",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "hide": false,
+          "panelId": 35,
+          "refId": "B",
+          "withTransforms": true
+        }
+      ],
+      "title": "Quota Overview (Files)",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "joinByField",
+          "options": {
+            "byField": "Mount",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Grace Period": true,
+              "Limit": true,
+              "Quota": true,
+              "Used": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Usage": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
       "description": "Average wait time across all jobs terminated in the selected time period.",
       "fieldConfig": {
         "defaults": {
@@ -759,6 +1094,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "fillOpacity": 80,
             "gradientMode": "none",
@@ -1228,12 +1564,7 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "CPU Efficiency"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "11.0.0",
       "targets": [
@@ -1304,11 +1635,8 @@
               "runtime": "Walltime",
               "runtime_sec": "Run Time",
               "state": "State",
-              "wait_time": "Wait Time",
-	      "date": "Date",
-	      "day": "Day",
-	      "hour": "Hour"
-	    }
+              "wait_time": "Wait Time"
+            }
           }
         },
         {
@@ -1415,9 +1743,9 @@
               "CPU Efficiency": true,
               "Memory Utilisation": true,
               "Run Time": false,
-	      "Date": true,
-	      "Day": true,
-	      "Hour": true
+              "date": true,
+              "day": true,
+              "hour": true
             },
             "includeByName": {},
             "indexByName": {
@@ -1449,9 +1777,682 @@
         }
       ],
       "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 34,
+      "panels": [],
+      "title": "Quotas",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "Infinity": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 1,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Grace Period"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "from": -1e+26,
+                      "result": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "Expired"
+                      },
+                      "to": -1
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 86400
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+26
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Quota"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Limit"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 33,
+      "options": {
+        "cellHeight": "md",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 7,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time({__name__=~\"node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_quota|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_grace\", user=\"$user\", node_type=\"core\"}[$__interval])",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "interval": "5m",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Storage Quotas (Blocks)",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "mount_path"
+            ],
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "node_user_storage_quota_(.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "blocks_used_fraction",
+            "binary": {
+              "left": "blocks_used",
+              "operator": "/",
+              "right": "blocks_quota"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "files_used": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 3,
+              "blocks_grace": 11,
+              "blocks_limit": 10,
+              "blocks_quota": 9,
+              "blocks_used": 8,
+              "blocks_used_fraction": 2,
+              "files_grace": 7,
+              "files_limit": 6,
+              "files_quota": 5,
+              "files_used": 4,
+              "files_used_fraction": 1,
+              "mount_path": 0
+            },
+            "renameByName": {
+              "blocks_grace": "Grace Period",
+              "blocks_limit": "Limit",
+              "blocks_quota": "Quota",
+              "blocks_used": "Used",
+              "blocks_used_fraction": "Usage",
+              "files_grace": "Files Grace Period (s)",
+              "files_limit": "Files Limit",
+              "files_quota": "Files Quota",
+              "files_used": "Files Used",
+              "files_used_fraction": "Files Used %",
+              "mount_path": "Mount"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P27AA5C6EF93B953C"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "inspect": false
+          },
+          "decimals": 2,
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "Infinity": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 1,
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Grace Period"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "N/A"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "from": -1e+26,
+                      "result": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "Expired"
+                      },
+                      "to": -1
+                    },
+                    "type": "range"
+                  }
+                ]
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    },
+                    {
+                      "color": "orange",
+                      "value": 86400
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Usage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.7
+                    },
+                    {
+                      "color": "orange",
+                      "value": 0.8
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.9
+                    },
+                    {
+                      "color": "text",
+                      "value": 1e+26
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Quota"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Limit"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 50
+      },
+      "id": 35,
+      "options": {
+        "cellHeight": "md",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 7,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P27AA5C6EF93B953C"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "last_over_time({__name__=~\"node_user_storage_quota_files_used|node_user_storage_quota_files_quota|node_user_storage_quota_files_limit|node_user_storage_quota_files_grace\", user=\"$user\", node_type=\"core\"}[$__interval])",
+          "format": "time_series",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": true,
+          "interval": "5m",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Storage Quotas (Files)",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {
+            "keepLabels": [
+              "mount_path"
+            ],
+            "mode": "columns"
+          }
+        },
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "node_user_storage_quota_(.*)",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "files_used_fraction",
+            "binary": {
+              "left": "files_used",
+              "operator": "/",
+              "right": "files_quota"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "files_used": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Time": 3,
+              "blocks_grace": 11,
+              "blocks_limit": 10,
+              "blocks_quota": 9,
+              "blocks_used": 8,
+              "blocks_used_fraction": 2,
+              "files_grace": 7,
+              "files_limit": 6,
+              "files_quota": 5,
+              "files_used": 4,
+              "files_used_fraction": 1,
+              "mount_path": 0
+            },
+            "renameByName": {
+              "blocks_grace": "Block Grace Period (s)",
+              "blocks_limit": "Blocks Limit",
+              "blocks_quota": "Blocks Quota",
+              "blocks_used": "Blocks Used",
+              "blocks_used_fraction": "Blocks Used %",
+              "files_grace": "Grace Period",
+              "files_limit": "Limit",
+              "files_quota": "Quota",
+              "files_used": "Used",
+              "files_used_fraction": "Usage",
+              "mount_path": "Mount"
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [
     "Short Term Metrics (30d retention)"
@@ -1459,16 +2460,44 @@
   "templating": {
     "list": [
       {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P27AA5C6EF93B953C"
+        },
+        "definition": "label_values({__name__=~\"node_user_storage_quota_files_used|node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_grace|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_quota|node_user_storage_quota_files_grace|node_user_storage_quota_files_limit|node_user_storage_quota_files_quota\"},user)",
+        "description": "Cluster user.",
+        "hide": 0,
+        "includeAll": false,
+        "label": "User",
+        "multi": false,
+        "name": "user",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values({__name__=~\"node_user_storage_quota_files_used|node_user_storage_quota_blocks_used|node_user_storage_quota_blocks_grace|node_user_storage_quota_blocks_limit|node_user_storage_quota_blocks_quota|node_user_storage_quota_files_grace|node_user_storage_quota_files_limit|node_user_storage_quota_files_quota\"},user)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
+        "definition": "label_values(slurm_job_meta{user=\"$user\"},account)",
         "description": "Slurm account.",
         "hide": 0,
         "includeAll": true,
@@ -1477,27 +2506,31 @@
         "name": "account",
         "options": [],
         "query": {
-          "qryType": 3,
-          "query": "query_result(count by (account) (last_over_time(slurm_job_meta{job=\"slurm-job\"}[$__range])))",
+          "qryType": 1,
+          "query": "label_values(slurm_job_meta{user=\"$user\"},account)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
-        "regex": ".*account=\"(.*?)\".*",
+        "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "type": "query"
       },
       {
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
+        "definition": "label_values(slurm_job_meta{account=\"$account\"},partition)",
         "hide": 0,
         "includeAll": true,
         "label": "Partition",
@@ -1505,41 +2538,12 @@
         "name": "partition",
         "options": [],
         "query": {
-          "qryType": 3,
-          "query": "query_result(count by (partition) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\"}[$__range])))",
+          "qryType": 1,
+          "query": "label_values(slurm_job_meta{account=\"$account\"},partition)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
-        "regex": ".*partition=\"(.*?)\".*",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "P27AA5C6EF93B953C"
-        },
-        "definition": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
-        "description": "Cluster user.",
-        "hide": 0,
-        "includeAll": true,
-        "label": "User",
-        "multi": true,
-        "name": "user",
-        "options": [],
-        "query": {
-          "qryType": 3,
-          "query": "query_result(count by (user) (last_over_time(slurm_job_meta{job=\"slurm-job\", account=~\"$account\", partition=~\"$partition\"}[$__range])))",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "regex": ".*user=\"(.*?)\".*",
+        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
@@ -1547,14 +2551,14 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-24h",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "",
-  "title": "Slurm Job Metrics (by Account/User)",
-  "uid": "d0cad303-0639-426e-a54a-3ab6faabddf5",
-  "version": 14,
+  "title": "User Metrics",
+  "uid": "dc007c82-e816-4111-a32b-606567330498",
+  "version": 5,
   "weekStart": ""
 }
