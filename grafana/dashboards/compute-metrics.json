@@ -2823,7 +2823,7 @@
           "type": "prometheus",
           "uid": "P27AA5C6EF93B953C"
         },
-        "definition": "label_values(node_exporter_build_info{node_type=\"compute\"},instance)",
+        "definition": "label_values(node_exporter_build_info{node_type=~\"compute|login\"},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "node",
@@ -2833,7 +2833,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(node_exporter_build_info{node_type=\"compute\"},instance)",
+          "query": "label_values(node_exporter_build_info{node_type=~\"compute|login\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -2881,6 +2881,6 @@
   "timezone": "browser",
   "title": "Compute Node Metrics - View Individual Node Information",
   "uid": "ac255358-acb4-490f-a480-262ec1436044",
-  "version": 14,
+  "version": 15,
   "weekStart": ""
 }
